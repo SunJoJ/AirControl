@@ -28,8 +28,8 @@ class MainActivity : AppCompatActivity() {
         var appBarConfiguration = AppBarConfiguration(
             topLevelDestinationIds = setOf(
                 R.id.homeFragment,
-                R.id.profileFragment,
                 R.id.mapFragment,
+                R.id.profileFragment,
                 R.id.listFragment,
                 R.id.settingsFragment
             )
