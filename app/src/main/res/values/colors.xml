@@ -5,4 +5,18 @@
     <color name="colorAccent">#2654FF</color>
     <color name="colorPrimaryVariant">#aaa</color>
     <color name="colorOnPrimary">#FFFFFF</color>
+    <color name="white">#FFFFFF</color>
+
+    <color name="darkGreen">#4CAF50</color>
+    <color name="lightGreen">#3DF444</color>
+    <color name="yellow">#FFEB3B</color>
+    <color name="orange">#DE6D1C</color>
+    <color name="lightRed">#E53935</color>
+    <color name="darkRed">#C8110C</color>
+
+    <color name="black">#000000</color>
+    <color name="gray">#BDBDBD</color>
+    <color name="lightGray">#E0E0E0</color>
+    <color name="transparent">#80000000</color>
+
 </resources>

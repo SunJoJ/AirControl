@@ -22,10 +22,6 @@ class MainFragment : Fragment() {
 
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_main, container, false)
 
-        binding.buttonWelcomeMe.setOnClickListener{
-            Navigation.findNavController(it).navigate(R.id.action_mainFragment_to_settingsFragment)
-        }
-
         return  binding.root
     }
 
