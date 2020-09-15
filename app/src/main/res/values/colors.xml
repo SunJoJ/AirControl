@@ -7,12 +7,13 @@
     <color name="colorOnPrimary">#FFFFFF</color>
     <color name="white">#FFFFFF</color>
 
-    <color name="darkGreen">#4CAF50</color>
-    <color name="lightGreen">#3DF444</color>
-    <color name="yellow">#FFEB3B</color>
-    <color name="orange">#DE6D1C</color>
-    <color name="lightRed">#E53935</color>
-    <color name="darkRed">#C8110C</color>
+    <color name="darkGreen">#4DC852</color>
+    <color name="lightGreen">#2EE535</color>
+    <color name="yellow">#FFD75B</color>
+    <color name="orange">#FB8936</color>
+    <color name="lightRed">#F44440</color>
+    <color name="darkRed">#E1211C</color>
+    <color name="purple">#B95FDB</color>
 
     <color name="black">#000000</color>
     <color name="gray">#BDBDBD</color>
