@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:foreground="?android:attr/selectableItemBackground">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/position"
+            android:layout_width="40dp"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:layout_height="match_parent"/>
+
+        <ImageView
+            android:id="@+id/flag"
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            android:layout_toEndOf="@+id/position" />
+
+        <TextView
+            android:id="@+id/nameOfCity"
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            android:layout_toStartOf="@+id/aqiIndex"
+            android:layout_toEndOf="@+id/flag"
+            android:gravity="center_vertical"
+            android:paddingStart="5dp" />
+
+        <RelativeLayout
+
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            android:padding="8dp"
+            android:layout_alignParentEnd="true">
+
+            <RelativeLayout
+                android:id="@+id/indexColor"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/aqiIndex"
+            android:layout_width="50dp"
+            android:gravity="center"
+            android:layout_height="match_parent"
+            android:layout_alignParentEnd="true"/>
+
+    </RelativeLayout>
+
+
+</LinearLayout>

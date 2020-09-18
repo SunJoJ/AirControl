@@ -8,7 +8,7 @@
 
     <fragment
         android:id="@+id/mapFragment"
-        android:name="com.example.aircontrol.MapFragment"
+        android:name="com.example.aircontrol.fragments.MapFragment"
         android:label="MapFragment"
         tools:layout="@layout/fragment_map">
         <action
@@ -19,20 +19,20 @@
                 app:argType="string" />
             <argument
                 android:name="cityData"
-                app:argType="com.example.aircontrol.PollutionData" />
+                app:argType="com.example.aircontrol.models.PollutionData" />
         </action>
 
     </fragment>
 
     <fragment
         android:id="@+id/settingsFragment"
-        android:name="com.example.aircontrol.SettingsFragment"
+        android:name="com.example.aircontrol.fragments.SettingsFragment"
         android:label="SettingsFragment"
         tools:layout="@layout/fragment_settings"/>
 
     <fragment
         android:id="@+id/mainFragment"
-        android:name="com.example.aircontrol.MainFragment"
+        android:name="com.example.aircontrol.fragments.MainFragment"
         android:label="MainFragment"
         tools:layout="@layout/fragment_home">
         <action
@@ -54,24 +54,24 @@
 
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.example.aircontrol.HomeFragment"
+        android:name="com.example.aircontrol.fragments.HomeFragment"
         android:label="HomeFragment"
         tools:layout="@layout/fragment_home" />
 
     <fragment
         android:id="@+id/listFragment"
-        android:name="com.example.aircontrol.ListFragment"
+        android:name="com.example.aircontrol.fragments.ListFragment"
         android:label="ListFragment"
         tools:layout="@layout/fragment_list" />
 
     <fragment
         android:id="@+id/profileFragment"
-        android:name="com.example.aircontrol.ProfileFragment"
+        android:name="com.example.aircontrol.fragments.ProfileFragment"
         android:label="ProfileFragment"
         tools:layout="@layout/fragment_profile" />
     <dialog
         android:id="@+id/markerDetailsFragment"
-        android:name="com.example.aircontrol.MarkerDetailsFragment"
+        android:name="com.example.aircontrol.fragments.MarkerDetailsFragment"
         android:label="fragment_marker_details"
         tools:layout="@layout/fragment_marker_details" >
         <action
@@ -82,12 +82,12 @@
                 app:argType="string" />
             <argument
                 android:name="cityData"
-                app:argType="com.example.aircontrol.PollutionData" />
+                app:argType="com.example.aircontrol.models.PollutionData" />
         </action>
     </dialog>
     <fragment
         android:id="@+id/cityDataFragment"
-        android:name="com.example.aircontrol.CityDataFragment"
+        android:name="com.example.aircontrol.fragments.CityDataFragment"
         android:label="fragment_city_data"
         tools:layout="@layout/fragment_city_data" />
 

@@ -1,4 +1,4 @@
-package com.example.aircontrol
+package com.example.aircontrol.models
 
 import android.os.Parcelable
 import com.google.gson.annotations.SerializedName

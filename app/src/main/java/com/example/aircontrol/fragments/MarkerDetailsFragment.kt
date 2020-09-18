@@ -1,4 +1,4 @@
-package com.example.aircontrol
+package com.example.aircontrol.fragments
 
 import android.os.Bundle
 import android.view.*
@@ -6,11 +6,12 @@ import androidx.core.os.bundleOf
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
+import com.example.aircontrol.models.PollutionData
+import com.example.aircontrol.utils.QualityRanges
+import com.example.aircontrol.R
 import com.example.aircontrol.databinding.FragmentMarkerDetailsBinding
 import kotlinx.android.synthetic.main.fragment_marker_details.*
-import java.io.Serializable
 
 
 /**
@@ -31,7 +32,8 @@ class MarkerDetailsFragment : DialogFragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_marker_details, container, false)
+        binding = DataBindingUtil.inflate(inflater,
+            R.layout.fragment_marker_details, container, false)
 
 
         return binding.root

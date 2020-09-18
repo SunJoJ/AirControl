@@ -1,7 +1,6 @@
-package com.example.aircontrol
+package com.example.aircontrol.utils
 
-import android.graphics.drawable.Drawable
-import androidx.core.content.ContextCompat
+import com.example.aircontrol.R
 
 object QualityRanges {
 
@@ -54,12 +53,12 @@ object QualityRanges {
     private const val C6H6_BAD = 50
     private const val C6H6_VERY_BAD = 1000
 
-    private const val veryGood = 10
-    private const val good = 20
-    private const val moderate = 40
-    private const val passable = 60
-    private const val bad = 90
-    private const val veryBad = 120
+    private const val veryGood = 25
+    private const val good = 50
+    private const val moderate = 100
+    private const val passable = 125
+    private const val bad = 150
+    private const val veryBad = 200
 
     private fun isBetween(x: Int, lower: Int, upper: Int): Boolean {
         return x in lower..upper
@@ -71,7 +70,7 @@ object QualityRanges {
         if(isBetween(x, veryGood, good))
             return R.drawable.light_green_rounded_corner
         if(isBetween(x, good, moderate))
-            return R.drawable.yellow_rouned_corner
+            return R.drawable.yellow_rounded_corner
         if(isBetween(x, moderate, passable))
             return R.drawable.orange_rounded_corner
         if(isBetween(x, passable, bad))
@@ -82,6 +81,25 @@ object QualityRanges {
             R.drawable.purple_rounded_corner
         else
             R.drawable.rounded_corner_gray
+    }
+
+    fun  getIconMarker(x: Int): Int {
+        if(isBetween(x, 0, veryGood))
+            return R.drawable.dark_green_marker
+        if(isBetween(x, veryGood, good))
+            return R.drawable.light_green_marker
+        if(isBetween(x, good, moderate))
+            return R.drawable.yellow_marker
+        if(isBetween(x, moderate, passable))
+            return R.drawable.orange_marker
+        if(isBetween(x, passable, bad))
+            return R.drawable.light_red_marker
+        if(isBetween(x, bad, veryBad))
+            return R.drawable.dark_red_marker
+        return if(isBetween(x, veryBad, 9999))
+            R.drawable.purple_marker
+        else
+            R.drawable.yellow_marker
     }
 
 

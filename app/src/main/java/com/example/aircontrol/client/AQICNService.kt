@@ -1,4 +1,4 @@
-package com.example.aircontrol
+package com.example.aircontrol.client
 
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit

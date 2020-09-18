@@ -1,4 +1,4 @@
-package com.example.aircontrol
+package com.example.aircontrol.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,8 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.navigation.Navigation
-import androidx.navigation.findNavController
+import com.example.aircontrol.R
 import com.example.aircontrol.databinding.FragmentMainBinding
 
 class MainFragment : Fragment() {

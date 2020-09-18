@@ -1,5 +1,6 @@
-package com.example.aircontrol
+package com.example.aircontrol.client
 
+import com.example.aircontrol.models.PollutionData
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Path
