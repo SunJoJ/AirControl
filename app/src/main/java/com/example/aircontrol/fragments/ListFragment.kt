@@ -6,8 +6,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.core.os.bundleOf
 import androidx.databinding.DataBindingUtil
+import androidx.navigation.findNavController
 import com.example.aircontrol.R
+import com.example.aircontrol.adapters.AdapterRatingListClickListener
 import com.example.aircontrol.adapters.RatingListAdapter
 import com.example.aircontrol.client.AQICNService
 import com.example.aircontrol.client.AirQualityAPI
@@ -24,10 +28,11 @@ import retrofit2.Response
  * Use the [ListFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class ListFragment : Fragment() {
+class ListFragment : Fragment(), AdapterRatingListClickListener {
 
     lateinit var binding : FragmentListBinding
-    val listOfPollutionData: ArrayList<PollutionData> = arrayListOf()
+    data class DataWithCode(val data: PollutionData, val code: String)
+    val listOfPollutionData: ArrayList<DataWithCode> = arrayListOf()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,22 +54,19 @@ class ListFragment : Fragment() {
 
         val request = AQICNService.buildService(AirQualityAPI::class.java)
         for(city in Cities.allCitiesArray) {
-            val call = request.getCityPollutionData(city)
+            val call = request.getCityPollutionData(city.cityName)
             call.enqueue(object : Callback<PollutionData> {
-                override fun onResponse(
-                    call: Call<PollutionData>,
-                    response: Response<PollutionData>
-                ) {
+                override fun onResponse(call: Call<PollutionData>, response: Response<PollutionData>) {
+
                     Log.d("test", response.body().toString())
                     val data = response.body()
                     if (data != null) {
-                        listOfPollutionData.add(data)
-                        listOfPollutionData.sortByDescending { it.data.aqi }
+                        listOfPollutionData.add(DataWithCode(data, city.isoCode))
+                        listOfPollutionData.sortByDescending { it.data.data.aqi }
 
-                        val adapter = context?.let { RatingListAdapter(it, listOfPollutionData) }
+                        val adapter = context?.let { RatingListAdapter(it, listOfPollutionData, this@ListFragment) }
                         ratingList.adapter = adapter
                         adapter?.notifyDataSetChanged()
-
                     }
                 }
 
@@ -74,5 +76,10 @@ class ListFragment : Fragment() {
             })
         }
 
+    }
+
+    override fun onItemClickListener(cityData: DataWithCode) {
+        val bundle = bundleOf("cityName" to cityData.data.data.city.name, "cityData" to cityData.data)
+        view?.findNavController()?.navigate(R.id.action_listFragment_to_cityDataFragment, bundle)
     }
 }

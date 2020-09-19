@@ -1,6 +1,16 @@
 package com.example.aircontrol.utils
 
+import android.content.Context
+import androidx.core.content.ContextCompat
 import com.example.aircontrol.R
+import com.example.aircontrol.models.Daily
+import com.github.mikephil.charting.charts.BarChart
+import com.github.mikephil.charting.components.XAxis
+import com.github.mikephil.charting.data.BarData
+import com.github.mikephil.charting.data.BarDataSet
+import com.github.mikephil.charting.data.BarEntry
+import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
+import com.github.mikephil.charting.interfaces.datasets.IBarDataSet
 
 object QualityRanges {
 
@@ -59,6 +69,188 @@ object QualityRanges {
     private const val passable = 125
     private const val bad = 150
     private const val veryBad = 200
+
+    fun paintChart(values: Daily, context: Context, parameter: String, barChart: BarChart): BarData {
+
+        when(parameter) {
+            "o3" -> {
+                val listOfData = values.o3
+
+                val bars = ArrayList<IBarDataSet>()
+                val time = ArrayList<String>()
+                for ((num, x) in listOfData.withIndex()) {
+                    val entries = ArrayList<BarEntry>()
+
+                    time.add(x.day)
+                    entries.add(BarEntry(num.toFloat(), x.avg.toFloat()))
+                    when {
+                        isBetween(x.avg, 0, O3_VERY_GOOD) -> {
+                            val dataSet = BarDataSet(entries, "Green")
+                            val color = ContextCompat.getColor(context, R.color.darkGreen)
+                            dataSet.color = color
+                            bars.add(dataSet)
+                        }
+                        isBetween(x.avg, O3_VERY_GOOD + 1, O3_GOOD) -> {
+                            val dataSet = BarDataSet(entries, "Green")
+                            val color = ContextCompat.getColor(context, R.color.lightGreen)
+                            dataSet.color = color
+                            bars.add(dataSet)
+                        }
+                        isBetween(x.avg, O3_GOOD + 1, O3_MODERATE) -> {
+                            val dataSet = BarDataSet(entries, "Yellow")
+                            val color = ContextCompat.getColor(context, R.color.yellow)
+                            dataSet.color = color
+                            bars.add(dataSet)
+                        }
+                        isBetween(x.avg, O3_MODERATE + 1, O3_PASSABLE) -> {
+                            val dataSet = BarDataSet(entries, "Yellow")
+                            val color = ContextCompat.getColor(context, R.color.orange)
+                            dataSet.color = color
+                            bars.add(dataSet)
+                        }
+                        isBetween(x.avg, O3_PASSABLE + 1, O3_BAD) -> {
+                            val dataSet = BarDataSet(entries, "Red")
+                            val color = ContextCompat.getColor(context, R.color.lightRed)
+                            dataSet.color = color
+                            bars.add(dataSet)
+                        }
+                        isBetween(x.avg, O3_BAD + 1, O3_VERY_BAD) -> {
+                            val dataSet = BarDataSet(entries, "Red")
+                            val color = ContextCompat.getColor(context, R.color.darkRed)
+                            dataSet.color = color
+                            bars.add(dataSet)
+                        }
+                    }
+                }
+                val xAxis = barChart.xAxis
+                xAxis.position = XAxis.XAxisPosition.BOTTOM
+
+                val formatter = IndexAxisValueFormatter(time)
+                xAxis.granularity = 1f
+                xAxis.valueFormatter = formatter
+
+                return BarData(bars)
+            }
+            "pm10" -> {
+                val listOfData = values.pm10
+
+                val bars = ArrayList<IBarDataSet>()
+                val time = ArrayList<String>()
+                for ((num, x) in listOfData.withIndex()) {
+                    val entries = ArrayList<BarEntry>()
+
+                    time.add(x.day)
+                    entries.add(BarEntry(num.toFloat(), x.avg.toFloat()))
+                    when {
+                        isBetween(x.avg, 0, PM10_VERY_GOOD) -> {
+                            val dataSet = BarDataSet(entries, "Green")
+                            val color = ContextCompat.getColor(context, R.color.darkGreen)
+                            dataSet.color = color
+                            bars.add(dataSet)
+                        }
+                        isBetween(x.avg, PM10_VERY_GOOD + 1, PM10_GOOD) -> {
+                            val dataSet = BarDataSet(entries, "Green")
+                            val color = ContextCompat.getColor(context, R.color.lightGreen)
+                            dataSet.color = color
+                            bars.add(dataSet)
+                        }
+                        isBetween(x.avg, PM10_GOOD + 1, PM10_MODERATE) -> {
+                            val dataSet = BarDataSet(entries, "Yellow")
+                            val color = ContextCompat.getColor(context, R.color.yellow)
+                            dataSet.color = color
+                            bars.add(dataSet)
+                        }
+                        isBetween(x.avg, PM10_MODERATE + 1, PM10_PASSABLE) -> {
+                            val dataSet = BarDataSet(entries, "Yellow")
+                            val color = ContextCompat.getColor(context, R.color.orange)
+                            dataSet.color = color
+                            bars.add(dataSet)
+                        }
+                        isBetween(x.avg, PM10_PASSABLE + 1, PM10_BAD) -> {
+                            val dataSet = BarDataSet(entries, "Red")
+                            val color = ContextCompat.getColor(context, R.color.lightRed)
+                            dataSet.color = color
+                            bars.add(dataSet)
+                        }
+                        isBetween(x.avg, PM10_BAD + 1, PM10_VERY_BAD) -> {
+                            val dataSet = BarDataSet(entries, "Red")
+                            val color = ContextCompat.getColor(context, R.color.darkRed)
+                            dataSet.color = color
+                            bars.add(dataSet)
+                        }
+                    }
+                }
+                val xAxis = barChart.xAxis
+                xAxis.position = XAxis.XAxisPosition.BOTTOM
+
+                val formatter = IndexAxisValueFormatter(time)
+                xAxis.granularity = 1f
+                xAxis.valueFormatter = formatter
+
+                return BarData(bars)
+            }
+            "pm25" -> {
+                val listOfData = values.pm25
+
+                val bars = ArrayList<IBarDataSet>()
+                val time = ArrayList<String>()
+                for ((num, x) in listOfData.withIndex()) {
+                    val entries = ArrayList<BarEntry>()
+
+                    time.add(x.day)
+                    entries.add(BarEntry(num.toFloat(), x.avg.toFloat()))
+                    when {
+                        isBetween(x.avg, 0, PM25_VERY_GOOD) -> {
+                            val dataSet = BarDataSet(entries, "Green")
+                            val color = ContextCompat.getColor(context, R.color.darkGreen)
+                            dataSet.color = color
+                            bars.add(dataSet)
+                        }
+                        isBetween(x.avg, PM25_VERY_GOOD + 1, PM25_GOOD) -> {
+                            val dataSet = BarDataSet(entries, "Green")
+                            val color = ContextCompat.getColor(context, R.color.lightGreen)
+                            dataSet.color = color
+                            bars.add(dataSet)
+                        }
+                        isBetween(x.avg, PM25_GOOD + 1, PM25_MODERATE) -> {
+                            val dataSet = BarDataSet(entries, "Yellow")
+                            val color = ContextCompat.getColor(context, R.color.yellow)
+                            dataSet.color = color
+                            bars.add(dataSet)
+                        }
+                        isBetween(x.avg, PM25_MODERATE + 1, PM25_PASSABLE) -> {
+                            val dataSet = BarDataSet(entries, "Yellow")
+                            val color = ContextCompat.getColor(context, R.color.orange)
+                            dataSet.color = color
+                            bars.add(dataSet)
+                        }
+                        isBetween(x.avg, PM25_PASSABLE + 1, PM25_BAD) -> {
+                            val dataSet = BarDataSet(entries, "Red")
+                            val color = ContextCompat.getColor(context, R.color.lightRed)
+                            dataSet.color = color
+                            bars.add(dataSet)
+                        }
+                        isBetween(x.avg, PM25_BAD + 1, PM25_VERY_BAD) -> {
+                            val dataSet = BarDataSet(entries, "Red")
+                            val color = ContextCompat.getColor(context, R.color.darkRed)
+                            dataSet.color = color
+                            bars.add(dataSet)
+                        }
+                    }
+                }
+                val xAxis = barChart.xAxis
+                xAxis.position = XAxis.XAxisPosition.BOTTOM
+
+                val formatter = IndexAxisValueFormatter(time)
+                xAxis.granularity = 1f
+                xAxis.valueFormatter = formatter
+
+                return BarData(bars)
+            }
+            else -> return BarData()
+        }
+    }
+
 
     private fun isBetween(x: Int, lower: Int, upper: Int): Boolean {
         return x in lower..upper

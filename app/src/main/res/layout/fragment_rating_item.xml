@@ -21,6 +21,8 @@
         <ImageView
             android:id="@+id/flag"
             android:layout_width="50dp"
+            android:scaleX="0.8"
+            android:scaleY="0.8"
             android:layout_height="match_parent"
             android:layout_toEndOf="@+id/position" />
 
@@ -30,6 +32,8 @@
             android:layout_height="match_parent"
             android:layout_toStartOf="@+id/aqiIndex"
             android:layout_toEndOf="@+id/flag"
+            android:maxLines="1"
+            android:ellipsize="end"
             android:gravity="center_vertical"
             android:paddingStart="5dp" />
 

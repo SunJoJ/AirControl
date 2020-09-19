@@ -4,89 +4,209 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".fragments.CityDataFragment">
-
-    <androidx.constraintlayout.widget.ConstraintLayout
+    
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@color/white">
 
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/cityName"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textAlignment="center"
-            android:textSize="16sp"
-            android:padding="10sp"
-            android:text="@string/test"
-            app:layout_constraintBottom_toTopOf="@+id/markerDetailsFragmentLayout"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.0" />
-
-        <com.google.android.material.circularreveal.CircularRevealRelativeLayout
-            android:id="@+id/markerDetailsFragmentLayout"
-            android:layout_width="match_parent"
-            android:layout_height="130dp"
-            android:background="@drawable/rounded_corner"
-            android:clickable="true"
-            android:paddingLeft="5dp"
-            android:paddingTop="5dp"
-            android:paddingRight="5dp"
-            android:paddingBottom="5dp"
-            app:layout_constraintTop_toBottomOf="@id/cityName"
-            app:layout_constraintHorizontal_bias="0.0">
+            android:layout_height="wrap_content">
 
             <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/addressTextView"
+                android:id="@+id/cityName"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:textAlignment="center"
+                android:textSize="18sp"
+                android:padding="10sp"
+                android:text="@string/test"
+                app:layout_constraintBottom_toTopOf="@+id/markerDetailsFragmentLayout"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.0"
+                style="bold"/>
+
+            <com.google.android.material.circularreveal.CircularRevealRelativeLayout
+                android:id="@+id/markerDetailsFragmentLayout"
+                android:layout_width="match_parent"
+                android:layout_height="130dp"
+                android:background="@drawable/rounded_corner"
+                android:clickable="true"
+                android:paddingLeft="5dp"
+                android:paddingTop="5dp"
+                android:paddingRight="5dp"
+                android:paddingBottom="5dp"
+                app:layout_constraintTop_toBottomOf="@id/cityName"
+                app:layout_constraintHorizontal_bias="0.0">
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/addressTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginRight="5dp"
+                    android:paddingStart="5dp"
+                    android:paddingTop="5dp"
+                    android:paddingBottom="5dp"
+                    android:text="@string/test_address"
+                    android:textColor="@color/black"
+                    android:textSize="12sp"
+                    tools:ignore="RtlSymmetry" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/detailsTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="80dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:background="@drawable/dark_green_rounded_corner"
+                    android:firstBaselineToTopHeight="0dp"
+                    android:gravity="center_horizontal"
+                    android:includeFontPadding="false"
+                    android:lineSpacingExtra="0dp"
+                    android:padding="30dp"
+                    android:text="@string/aqi"
+                    android:textColor="@color/white"
+                    android:textSize="20sp" />
+
+            </com.google.android.material.circularreveal.CircularRevealRelativeLayout>
+
+            <com.google.android.material.circularreveal.CircularRevealRelativeLayout
+                android:id="@+id/weatherDataLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginRight="5dp"
-                android:paddingStart="5dp"
-                android:paddingTop="5dp"
-                android:paddingBottom="5dp"
-                android:text="@string/test_address"
-                android:textColor="@color/black"
-                android:textSize="12sp"
-                tools:ignore="RtlSymmetry" />
+                app:layout_constraintTop_toBottomOf="@+id/markerDetailsFragmentLayout">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="80dp"
+                    android:layout_alignParentBottom="true"
+                    android:textColor="@color/black"
+                    android:orientation="horizontal"
+                    android:background="@drawable/rounded_corner">
+
+                    <ImageView
+                        android:id="@+id/weatherIcon"
+                        android:layout_width="50dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="16dp"
+                        android:scaleX="0.8"
+                        android:scaleY="0.8"
+                        android:src="@drawable/cloud"
+                        app:layout_constraintStart_toStartOf="parent"
+                        tools:layout_editor_absoluteY="4dp" />
+
+                    <TextView
+                        android:id="@+id/tempText"
+                        android:layout_width="50dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="8dp"
+                        android:gravity="center_vertical"
+                        android:text="8"
+                        android:textSize="12sp"
+                        app:layout_constraintStart_toEndOf="@id/weatherIcon"
+                        tools:layout_editor_absoluteY="4dp" />
+
+                    <ImageView
+                        android:id="@+id/humidityIcon"
+                        android:layout_width="50dp"
+                        android:layout_height="match_parent"
+                        android:scaleX="0.7"
+                        android:scaleY="0.6"
+                        app:layout_constraintStart_toEndOf="@id/tempText"
+                        android:src="@drawable/humidity"/>
+
+                    <TextView
+                        android:id="@+id/humidityText"
+                        android:layout_width="50dp"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        app:layout_constraintStart_toEndOf="@+id/humidityIcon"
+                        android:text="8"
+                        android:textSize="12sp" />
+
+                    <ImageView
+                        android:id="@+id/windIcon"
+                        android:layout_width="50dp"
+                        android:layout_height="match_parent"
+                        android:scaleX="0.7"
+                        android:scaleY="0.6"
+                        android:src="@drawable/wind_icon"
+                        app:layout_constraintStart_toEndOf="@+id/humidityText"
+                        tools:layout_editor_absoluteY="4dp" />
+
+                    <TextView
+                        android:id="@+id/windSpeedText"
+                        android:layout_width="50dp"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:text="10"
+                        android:textSize="12sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.0"
+                        app:layout_constraintStart_toEndOf="@+id/windIcon"
+                        tools:layout_editor_absoluteY="4dp" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </com.google.android.material.circularreveal.CircularRevealRelativeLayout>
 
             <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/detailsTextView"
+                android:id="@+id/timeStamp"
                 android:layout_width="match_parent"
-                android:layout_height="80dp"
-                android:layout_alignParentBottom="true"
-                android:layout_gravity="center_vertical"
-                android:layout_marginLeft="5dp"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:text="@string/date"
+                app:layout_constraintTop_toBottomOf="@+id/weatherDataLayout"
+                app:layout_constraintVertical_bias="0.012" />
+
+            <RelativeLayout
+                android:id="@+id/titleForecast"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@+id/timeStamp">
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="center"
+                    android:text="@string/forecast"
+                    android:textSize="16sp"
+                    />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/chartRelativeLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginRight="5dp"
-                android:layout_marginBottom="5dp"
-                android:background="@drawable/dark_green_rounded_corner"
-                android:firstBaselineToTopHeight="0dp"
-                android:gravity="center_horizontal"
-                android:includeFontPadding="false"
-                android:lineSpacingExtra="0dp"
-                android:padding="30dp"
-                android:text="@string/aqi"
-                android:textColor="@color/white"
-                android:textSize="20sp" />
+                android:layout_marginLeft="5dp"
+                android:elevation="2dp"
+                app:layout_constraintTop_toBottomOf="@id/titleForecast"
+                android:background="@drawable/rounded_corner">
 
-        </com.google.android.material.circularreveal.CircularRevealRelativeLayout>
+                <com.github.mikephil.charting.charts.BarChart
+                    android:id="@+id/barChart"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp" />
+            </RelativeLayout>
 
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/timeStamp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textAlignment="center"
-            android:text="@string/date"
-            app:layout_constraintTop_toBottomOf="@+id/markerDetailsFragmentLayout"
-            app:layout_constraintVertical_bias="0.012" />
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/currentDataRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/chartRelativeLayout"/>
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/currentDataRecyclerView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/timeStamp"/>
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
 </layout>

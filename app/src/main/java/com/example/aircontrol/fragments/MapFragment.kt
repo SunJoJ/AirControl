@@ -57,7 +57,7 @@ class MapFragment : Fragment(), OnMapReadyCallback {
 
         val request = AQICNService.buildService(AirQualityAPI::class.java)
         for(city in Cities.allCitiesArray) {
-            val call = request.getCityPollutionData(city)
+            val call = request.getCityPollutionData(city.cityName)
             call.enqueue(object : Callback<PollutionData> {
                 override fun onResponse(
                     call: Call<PollutionData>,

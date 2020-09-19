@@ -1,21 +1,19 @@
 package com.example.aircontrol.fragments
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
-import com.example.aircontrol.models.PollutionData
 import com.example.aircontrol.R
 import com.example.aircontrol.adapters.CurrentDataAdapter
 import com.example.aircontrol.databinding.FragmentCityDataBinding
 import com.example.aircontrol.models.CurrentData
+import com.example.aircontrol.models.PollutionData
 import com.example.aircontrol.utils.QualityRanges
 import kotlinx.android.synthetic.main.fragment_city_data.*
-import kotlinx.android.synthetic.main.fragment_city_data.addressTextView
-import kotlinx.android.synthetic.main.fragment_city_data.detailsTextView
 
 /**
  * A simple [Fragment] subclass.
@@ -58,9 +56,7 @@ class CityDataFragment : Fragment() {
 
         val currentData = listOf(
             CurrentData("co", cityData?.data?.iaqi?.co?.v),
-            CurrentData("h", cityData?.data?.iaqi?.h?.v),
             CurrentData("no2", cityData?.data?.iaqi?.no2?.v),
-            CurrentData("p", cityData?.data?.iaqi?.p?.v),
             CurrentData("pm10", cityData?.data?.iaqi?.pm10?.avg?.toDouble()),
             CurrentData("pm25", cityData?.data?.iaqi?.pm25?.avg?.toDouble()),
         )
@@ -69,6 +65,18 @@ class CityDataFragment : Fragment() {
             layoutManager = GridLayoutManager(activity, 2)
             adapter = CurrentDataAdapter(currentData)
         }
+
+        tempText.text = cityData?.data?.iaqi?.t?.v.toString() + " ℃"
+        humidityText.text = cityData?.data?.iaqi?.h?.v.toString() + " %"
+        windSpeedText.text = cityData?.data?.iaqi?.w?.v.toString() + " m/h"
+
+        val chartData = cityData?.data?.forecast?.daily
+        val data = chartData?.let { context?.let { it1 -> QualityRanges.paintChart(it, it1, "pm10", barChart) } }
+        barChart.data = data
+        barChart.axisRight.isEnabled = false
+        barChart.description.isEnabled = false
+        barChart.legend.isEnabled = false
+        barChart.animateY(2000)
 
     }
 
