@@ -5,11 +5,12 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowManager
 import androidx.core.os.bundleOf
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
-import com.example.aircontrol.*
+import com.example.aircontrol.R
 import com.example.aircontrol.client.AQICNService
 import com.example.aircontrol.client.AirQualityAPI
 import com.example.aircontrol.databinding.FragmentMapBinding
@@ -38,9 +39,9 @@ class MapFragment : Fragment(), OnMapReadyCallback {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
-        
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_map, container, false)
+        activity?.window?.addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS)
+
         val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
         mapFragment?.getMapAsync(this)
 
@@ -66,7 +67,14 @@ class MapFragment : Fragment(), OnMapReadyCallback {
                     Log.d("test", response.body().toString())
                     val data = response.body()
                     if (data != null) {
-                        mClusterManager.addItem(MarkerItem(data.data.city.geo[0], data.data.city.geo[1], data.data.idx.toString(), data.data.aqi.toString()))
+                        mClusterManager.addItem(
+                            MarkerItem(
+                                data.data.city.geo[0],
+                                data.data.city.geo[1],
+                                data.data.idx.toString(),
+                                data.data.aqi.toString()
+                            )
+                        )
                         listOfPollutionData.add(data)
                         mClusterManager.cluster()
                     }
@@ -81,8 +89,14 @@ class MapFragment : Fragment(), OnMapReadyCallback {
 
         mClusterManager.let { it.setOnClusterItemClickListener {
             val cityData = listOfPollutionData.filter { x -> x.data.idx.toString() == it.title }
-            val bundle = bundleOf("cityName" to cityData[0].data.city.name, "cityData" to cityData[0])
-            view?.findNavController()?.navigate(R.id.action_mapFragment_to_markerDetailsFragment, bundle)
+            val bundle = bundleOf(
+                "cityName" to cityData[0].data.city.name,
+                "cityData" to cityData[0]
+            )
+            view?.findNavController()?.navigate(
+                R.id.action_mapFragment_to_markerDetailsFragment,
+                bundle
+            )
 
             true
             }

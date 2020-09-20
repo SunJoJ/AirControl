@@ -1,12 +1,11 @@
 package com.example.aircontrol.models
 
 import android.view.LayoutInflater
-import android.view.TextureView
 import android.view.ViewGroup
-import android.widget.RelativeLayout
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.aircontrol.R
+import com.example.aircontrol.utils.QualityRanges.getParameterColor
 import com.google.android.material.circularreveal.CircularRevealRelativeLayout
 
 class CurrentDataViewHolder(inflater: LayoutInflater, parent: ViewGroup) : RecyclerView.ViewHolder(inflater.inflate(R.layout.fragment_data_parameter_item, parent, false)) {
@@ -23,6 +22,8 @@ class CurrentDataViewHolder(inflater: LayoutInflater, parent: ViewGroup) : Recyc
     fun bind(currentData: CurrentData) {
         titlePollutant?.text = currentData.pollutantTitle
         dataPollutant?.text = currentData.actualValue.toString()
+        colorIndicator?.background = itemView.context.getDrawable(getParameterColor(currentData))
+
     }
 
 }

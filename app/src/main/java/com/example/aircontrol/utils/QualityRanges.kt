@@ -1,8 +1,10 @@
 package com.example.aircontrol.utils
 
 import android.content.Context
+import android.graphics.drawable.Drawable
 import androidx.core.content.ContextCompat
 import com.example.aircontrol.R
+import com.example.aircontrol.models.CurrentData
 import com.example.aircontrol.models.Daily
 import com.github.mikephil.charting.charts.BarChart
 import com.github.mikephil.charting.components.XAxis
@@ -252,11 +254,91 @@ object QualityRanges {
     }
 
 
-    private fun isBetween(x: Int, lower: Int, upper: Int): Boolean {
+    private fun isBetween(x: Int?, lower: Int, upper: Int): Boolean {
         return x in lower..upper
     }
 
-    fun  getIndexColor(x: Int): Int{
+    fun getParameterColor(currentData: CurrentData) : Int {
+        val x = currentData.actualValue?.toInt()
+        when (currentData.pollutantTitle) {
+            "pm10" -> {
+                if(isBetween(x, 0, PM10_VERY_GOOD))
+                    return R.drawable.dark_green_rounded_corner
+                if(isBetween(x, PM10_VERY_GOOD, PM10_GOOD))
+                    return R.drawable.light_green_rounded_corner
+                if(isBetween(x, PM10_GOOD, PM10_MODERATE))
+                    return R.drawable.yellow_rounded_corner
+                if(isBetween(x, PM10_MODERATE, PM10_PASSABLE))
+                    return R.drawable.orange_rounded_corner
+                if(isBetween(x, PM10_PASSABLE, PM10_BAD))
+                    return R.drawable.red_rounded_corner
+                if(isBetween(x, PM10_BAD, PM10_VERY_BAD))
+                    return R.drawable.dark_red_roudned_corner
+                return if(isBetween(x, PM10_VERY_BAD, 9999))
+                    R.drawable.purple_rounded_corner
+                else
+                    R.drawable.rounded_corner_gray
+            }
+            "pm25" -> {
+                if(isBetween(x, 0, PM25_VERY_GOOD))
+                    return R.drawable.dark_green_rounded_corner
+                if(isBetween(x, PM25_VERY_GOOD, PM25_GOOD))
+                    return R.drawable.light_green_rounded_corner
+                if(isBetween(x, PM25_GOOD, PM25_MODERATE))
+                    return R.drawable.yellow_rounded_corner
+                if(isBetween(x, PM25_MODERATE, PM25_PASSABLE))
+                    return R.drawable.orange_rounded_corner
+                if(isBetween(x, PM25_PASSABLE, PM25_BAD))
+                    return R.drawable.red_rounded_corner
+                if(isBetween(x, PM25_BAD, PM25_VERY_BAD))
+                    return R.drawable.dark_red_roudned_corner
+                return if(isBetween(x, PM25_VERY_BAD, 9999))
+                    R.drawable.purple_rounded_corner
+                else
+                    R.drawable.rounded_corner_gray
+            }
+            "co" -> {
+                if(isBetween(x, 0, CO_VERY_GOOD))
+                    return R.drawable.dark_green_rounded_corner
+                if(isBetween(x, CO_VERY_GOOD, CO_GOOD))
+                    return R.drawable.light_green_rounded_corner
+                if(isBetween(x, CO_GOOD, CO_MODERATE))
+                    return R.drawable.yellow_rounded_corner
+                if(isBetween(x, CO_MODERATE, CO_PASSABLE))
+                    return R.drawable.orange_rounded_corner
+                if(isBetween(x, CO_PASSABLE, CO_BAD))
+                    return R.drawable.red_rounded_corner
+                if(isBetween(x, CO_BAD, CO_VERY_BAD))
+                    return R.drawable.dark_red_roudned_corner
+                return if(isBetween(x, CO_VERY_BAD, 9999))
+                    R.drawable.purple_rounded_corner
+                else
+                    R.drawable.rounded_corner_gray
+            }
+            "no2" -> {
+                if(isBetween(x, 0, N02_VERY_GOOD))
+                    return R.drawable.dark_green_rounded_corner
+                if(isBetween(x, N02_VERY_GOOD, N02_GOOD))
+                    return R.drawable.light_green_rounded_corner
+                if(isBetween(x, N02_GOOD, N02_MODERATE))
+                    return R.drawable.yellow_rounded_corner
+                if(isBetween(x, N02_MODERATE, N02_PASSABLE))
+                    return R.drawable.orange_rounded_corner
+                if(isBetween(x, N02_PASSABLE, N02_BAD))
+                    return R.drawable.red_rounded_corner
+                if(isBetween(x, N02_BAD, N02_VERY_BAD))
+                    return R.drawable.dark_red_roudned_corner
+                return if(isBetween(x, N02_VERY_BAD, 9999))
+                    R.drawable.purple_rounded_corner
+                else
+                    R.drawable.rounded_corner_gray
+            }
+            else -> return R.drawable.rounded_corner_gray
+        }
+    }
+
+
+    fun getIndexColor(x: Int): Int{
         if(isBetween(x, 0, veryGood))
             return R.drawable.dark_green_rounded_corner
         if(isBetween(x, veryGood, good))

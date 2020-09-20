@@ -5,7 +5,6 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.aircontrol.models.CurrentData
 import com.example.aircontrol.models.CurrentDataViewHolder
-import com.example.aircontrol.models.Iaqi
 
 class CurrentDataAdapter(private val data: List<CurrentData>) : RecyclerView.Adapter<CurrentDataViewHolder>() {
 

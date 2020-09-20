@@ -21,7 +21,9 @@
         android:paddingTop="5dp"
         android:paddingBottom="5dp"
         android:paddingStart="5dp"
-        android:text="Test"
+        android:text="@string/test_address"
+        android:maxLines="1"
+        android:ellipsize="end"
         android:textColor="@color/black"
         android:textSize="12sp"
         tools:ignore="RtlSymmetry" />
@@ -32,12 +34,15 @@
             android:layout_height="80dp"
             android:layout_alignParentBottom="true"
             android:layout_gravity="center_vertical"
+            android:layout_marginTop="5dp"
+
+            android:background="@drawable/yellow_rounded_corner"
             android:firstBaselineToTopHeight="0dp"
             android:gravity="center_horizontal"
             android:includeFontPadding="false"
             android:lineSpacingExtra="0dp"
             android:padding="30dp"
-            android:text="AQI"
+            android:text="@string/aqi_header"
             android:textColor="@color/white"
             android:textSize="20sp" />
 
