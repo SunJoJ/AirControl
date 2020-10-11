@@ -34,7 +34,7 @@
         android:id="@+id/mainFragment"
         android:name="com.example.aircontrol.fragments.MainFragment"
         android:label="MainFragment"
-        tools:layout="@layout/fragment_home">
+        tools:layout="@layout/activity_main">
         <action
             android:id="@+id/action_mainFragment_to_settingsFragment"
             app:destination="@id/settingsFragment" />
@@ -48,8 +48,8 @@
             android:id="@+id/action_mainFragment_to_profileFragment2"
             app:destination="@id/profileFragment" />
         <action
-            android:id="@+id/action_mainFragment_to_listFragment2"
-            app:destination="@id/listFragment" />
+            android:id="@+id/action_mainFragment_to_ratingAndNewsFragment"
+            app:destination="@id/ratingAndNewsFragment" />
     </fragment>
 
     <fragment
@@ -73,9 +73,15 @@
         android:id="@+id/listFragment"
         android:name="com.example.aircontrol.fragments.ListFragment"
         android:label="ListFragment"
-        tools:layout="@layout/fragment_list" >
+        tools:layout="@layout/fragment_list" />
+
+    <fragment
+        android:id="@+id/ratingAndNewsFragment"
+        android:name="com.example.aircontrol.fragments.RatingAndNewsFragment"
+        android:label="RatingAndNewsFragment"
+        tools:layout="@layout/fragment_rating_and_news">
         <action
-            android:id="@+id/action_listFragment_to_cityDataFragment"
+            android:id="@+id/action_ratingAndNewsFragment_to_cityDataFragment"
             app:destination="@id/cityDataFragment">
             <argument
                 android:name="cityName"
@@ -84,6 +90,13 @@
                 android:name="cityData"
                 app:argType="com.example.aircontrol.models.PollutionData" />
         </action>
+        <action
+            android:id="@+id/action_ratingAndNewsFragment_to_textDescriptionFragment"
+            app:destination="@id/textDescriptionFragment">
+            <argument
+                android:name="title"
+                app:argType="string"/>
+        </action>
     </fragment>
 
     <fragment
@@ -91,11 +104,13 @@
         android:name="com.example.aircontrol.fragments.ProfileFragment"
         android:label="ProfileFragment"
         tools:layout="@layout/fragment_profile" />
+
     <dialog
         android:id="@+id/markerDetailsFragment"
         android:name="com.example.aircontrol.fragments.MarkerDetailsFragment"
         android:label="fragment_marker_details"
         tools:layout="@layout/fragment_marker_details" >
+
         <action
             android:id="@+id/action_markerDetailsFragment_to_cityDataFragment"
             app:destination="@id/cityDataFragment" >
@@ -106,12 +121,30 @@
                 android:name="cityData"
                 app:argType="com.example.aircontrol.models.PollutionData" />
         </action>
+
     </dialog>
+
     <fragment
         android:id="@+id/cityDataFragment"
         android:name="com.example.aircontrol.fragments.CityDataFragment"
         android:label="fragment_city_data"
-        tools:layout="@layout/fragment_city_data" />
+        tools:layout="@layout/fragment_city_data" >
+        <action
+            android:id="@+id/action_cityDataFragment_to_textDescriptionFragment"
+            app:destination="@id/textDescriptionFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/newsFragment"
+        android:name="com.example.aircontrol.fragments.NewsFragment"
+        android:label="fragment_news"
+        tools:layout="@layout/fragment_news" />
+
+    <fragment
+        android:id="@+id/textDescriptionFragment"
+        android:name="com.example.aircontrol.fragments.TextDescriptionFragment"
+        android:label="fragment_text_description"
+        tools:layout="@layout/fragment_text_description" />
 
 
 </navigation>

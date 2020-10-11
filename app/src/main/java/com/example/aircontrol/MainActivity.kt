@@ -23,6 +23,9 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         supportActionBar!!.hide()
 
+//        theme.applyStyle(R.style.AppThemeDark, true)
+
+
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
 
 //        var navController = findNavController(R.id.nav_host_fragment)
@@ -35,8 +38,8 @@ class MainActivity : AppCompatActivity() {
             navHostFragment.childFragmentManager,
             R.id.nav_host_fragment
         )
-        navController.navigatorProvider += navigator
-        navController.setGraph(R.navigation.nav_graph)
+        //navController.navigatorProvider += navigator
+        //navController.setGraph(R.navigation.nav_graph)
 
         bottom_nav.setupWithNavController(navController)
 
@@ -45,7 +48,7 @@ class MainActivity : AppCompatActivity() {
                 R.id.homeFragment,
                 R.id.mapFragment,
                 R.id.profileFragment,
-                R.id.listFragment,
+                R.id.ratingAndNewsFragment,
                 R.id.settingsFragment
             )
         )

@@ -47,41 +47,46 @@ class ListFragment : Fragment(), AdapterRatingListClickListener {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_list, container, false)
         activity?.window?.clearFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS)
 
-
+        //return inflater.inflate(R.layout.fragment_list, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val request = AQICNService.buildService(AirQualityAPI::class.java)
-        for(city in Cities.allCitiesArray) {
-            val call = request.getCityPollutionData(city.cityName)
-            call.enqueue(object : Callback<PollutionData> {
-                override fun onResponse(call: Call<PollutionData>, response: Response<PollutionData>) {
+        if(listOfPollutionData.isEmpty()) {
+            val request = AQICNService.buildService(AirQualityAPI::class.java)
+            for (city in Cities.allCitiesArray) {
+                val call = request.getCityPollutionData(city.cityName)
+                call.enqueue(object : Callback<PollutionData> {
+                    override fun onResponse(
+                        call: Call<PollutionData>,
+                        response: Response<PollutionData>
+                    ) {
 
-                    Log.d("test", response.body().toString())
-                    val data = response.body()
-                    if (data != null) {
-                        listOfPollutionData.add(DataWithCode(data, city.isoCode))
-                        listOfPollutionData.sortByDescending { it.data.data.aqi }
-
-                        val adapter = context?.let { RatingListAdapter(it, listOfPollutionData, this@ListFragment) }
-                        ratingList.adapter = adapter
-                        adapter?.notifyDataSetChanged()
+                        val data = response.body()
+                        if (data != null) {
+                            listOfPollutionData.add(DataWithCode(data, city.isoCode))
+                            listOfPollutionData.sortByDescending { it.data.data.aqi }
+                            val adapter = context?.let { RatingListAdapter(it, listOfPollutionData, this@ListFragment) }
+                            ratingList.adapter = adapter
+                            adapter?.notifyDataSetChanged()
+                        }
                     }
-                }
 
-                override fun onFailure(call: Call<PollutionData>, t: Throwable) {
-                    Log.d("test", t.message)
-                }
-            })
+                    override fun onFailure(call: Call<PollutionData>, t: Throwable) {
+                        Log.d("test", t.message)
+                    }
+                })
+            }
         }
-
+        val adapter = context?.let { RatingListAdapter(it, listOfPollutionData, this@ListFragment) }
+        ratingList.adapter = adapter
+        adapter?.notifyDataSetChanged()
     }
 
     override fun onItemClickListener(cityData: DataWithCode) {
         val bundle = bundleOf("cityName" to cityData.data.data.city.name, "cityData" to cityData.data)
-        view?.findNavController()?.navigate(R.id.action_listFragment_to_cityDataFragment, bundle)
+            view?.findNavController()?.navigate(R.id.action_ratingAndNewsFragment_to_cityDataFragment, bundle)
     }
 }

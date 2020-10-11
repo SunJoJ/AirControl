@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".fragments.MarkerDetailsFragment">
 
-    <com.google.android.material.circularreveal.CircularRevealRelativeLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/markerDetailsFragmentLayout"
         android:layout_width="match_parent"
         android:layout_height="120dp"
@@ -14,28 +14,29 @@
         android:paddingBottom="5dp"
         android:clickable="true">
 
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/addressTextView"
-        android:layout_width="370dp"
-        android:layout_height="wrap_content"
-        android:paddingTop="5dp"
-        android:paddingBottom="5dp"
-        android:paddingStart="5dp"
-        android:text="@string/test_address"
-        android:maxLines="1"
-        android:ellipsize="end"
-        android:textColor="@color/black"
-        android:textSize="12sp"
-        tools:ignore="RtlSymmetry" />
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/addressTextView"
+            android:layout_width="370dp"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:paddingStart="5dp"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:text="@string/test_address"
+            android:textColor="@color/black"
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="RtlSymmetry" />
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/detailsTextView"
             android:layout_width="match_parent"
-            android:layout_height="80dp"
+            android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_gravity="center_vertical"
             android:layout_marginTop="5dp"
-
             android:background="@drawable/yellow_rounded_corner"
             android:firstBaselineToTopHeight="0dp"
             android:gravity="center_horizontal"
@@ -44,16 +45,22 @@
             android:padding="30dp"
             android:text="@string/aqi_header"
             android:textColor="@color/white"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            app:layout_constraintTop_toBottomOf="@+id/addressTextView"
+            tools:layout_editor_absoluteX="5dp" />
 
         <com.google.android.material.checkbox.MaterialCheckBox
-        android:id="@+id/iconChoose"
-        android:layout_width="25dp"
-        android:layout_height="25dp"
-        android:button="@drawable/ic_baseline_star_border_24"
-        app:buttonTint="@android:color/background_dark"
-        android:layout_alignParentEnd="true"
-        />
+            android:id="@+id/iconChoose"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginBottom="6dp"
+            android:button="@drawable/ic_baseline_star_border_24"
+            app:buttonTint="@android:color/background_dark"
+            app:layout_constraintBottom_toTopOf="@+id/detailsTextView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/addressTextView"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    </com.google.android.material.circularreveal.CircularRevealRelativeLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 </layout>

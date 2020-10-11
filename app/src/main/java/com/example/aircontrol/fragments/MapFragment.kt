@@ -64,7 +64,7 @@ class MapFragment : Fragment(), OnMapReadyCallback {
                     call: Call<PollutionData>,
                     response: Response<PollutionData>
                 ) {
-                    Log.d("test", response.body().toString())
+                    //Log.d("test", response.body().toString())
                     val data = response.body()
                     if (data != null) {
                         mClusterManager.addItem(

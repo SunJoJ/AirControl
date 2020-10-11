@@ -5,6 +5,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
+import android.widget.CompoundButton
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
@@ -16,11 +18,7 @@ import com.example.aircontrol.models.PollutionData
 import com.example.aircontrol.utils.QualityRanges
 import kotlinx.android.synthetic.main.fragment_city_data.*
 
-/**
- * A simple [Fragment] subclass.
- * Use the [CityDataFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
+
 class CityDataFragment : Fragment() {
 
     lateinit var binding : FragmentCityDataBinding
@@ -72,13 +70,49 @@ class CityDataFragment : Fragment() {
         humidityText.text = cityData?.data?.iaqi?.h?.v.toString() + " %"
         windSpeedText.text = cityData?.data?.iaqi?.w?.v.toString() + " m/h"
 
-        val chartData = cityData?.data?.forecast?.daily
-        val data = chartData?.let { context?.let { it1 -> QualityRanges.paintChart(it, it1, "pm10", barChart) } }
-        barChart.data = data
-        barChart.axisRight.isEnabled = false
-        barChart.description.isEnabled = false
-        barChart.legend.isEnabled = false
-        barChart.animateY(2000)
+
+        
+
+        toggleButton.addOnButtonCheckedListener { group, checkedId, isChecked ->
+            if (isChecked){
+                when (checkedId) {
+                    pm10button.id -> {
+                        val chartData = cityData?.data?.forecast?.daily
+                        val data = chartData?.let { context?.let { it1 -> QualityRanges.paintChart(it, it1, "pm10", barChart) } }
+                        barChart.data = data
+                        barChart.axisRight.isEnabled = false
+                        barChart.description.isEnabled = false
+                        barChart.legend.isEnabled = false
+                        barChart.animateY(2000)
+                    }
+                    pm25button.id -> {
+                        val chartData = cityData?.data?.forecast?.daily
+                        val data = chartData?.let { context?.let { it1 -> QualityRanges.paintChart(it, it1, "pm25", barChart) } }
+                        barChart.data = data
+                        barChart.axisRight.isEnabled = false
+                        barChart.description.isEnabled = false
+                        barChart.legend.isEnabled = false
+                        barChart.animateY(2000)
+                    }
+                    o3button.id -> {
+                        val chartData = cityData?.data?.forecast?.daily
+                        val data = chartData?.let { context?.let { it1 -> QualityRanges.paintChart(it, it1, "o3", barChart) } }
+                        barChart.data = data
+                        barChart.axisRight.isEnabled = false
+                        barChart.description.isEnabled = false
+                        barChart.legend.isEnabled = false
+                        barChart.animateY(2000)
+                    }
+                }
+            } else {
+                if(-1 == group.checkedButtonId) {
+                    group.check(checkedId)
+                }
+            }
+        }
+
+
+
 
     }
 

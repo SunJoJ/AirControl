@@ -1,12 +1,15 @@
 <resources>
-    <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.MaterialComponents.Light">
-        <!-- Customize your theme here. -->
+
+    <style name="AppThemeLight" parent="Theme.MaterialComponents.Light">
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="colorPrimaryVariant">#577CFF</item>
         <item name="colorOnPrimary">@color/colorOnPrimary</item>
+    </style>
+
+    <style name="AppThemeDark" parent="Theme.MaterialComponents.DayNight">
+
     </style>
 
     <style name="Theme.App" parent="Theme.MaterialComponents">
