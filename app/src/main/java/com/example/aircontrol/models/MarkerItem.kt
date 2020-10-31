@@ -7,17 +7,20 @@ class MarkerItem : ClusterItem {
     private val mPosition: LatLng
     private val mTitle: String
     private val mSnippet: String
+    private val mCityName: String
 
     constructor(lat: Double, lng: Double) {
         mPosition = LatLng(lat, lng)
         mTitle = ""
         mSnippet = ""
+        mCityName = ""
     }
 
-    constructor(lat: Double, lng: Double, title: String, snippet: String) {
+    constructor(lat: Double, lng: Double, title: String, snippet: String, cityName : String) {
         mPosition = LatLng(lat, lng)
         mTitle = title
         mSnippet = snippet
+        mCityName = cityName
     }
 
     override fun getPosition(): LatLng {
@@ -31,4 +34,9 @@ class MarkerItem : ClusterItem {
     override fun getSnippet(): String {
         return mSnippet
     }
+
+    fun getCityName() : String {
+        return mCityName
+    }
+
 }

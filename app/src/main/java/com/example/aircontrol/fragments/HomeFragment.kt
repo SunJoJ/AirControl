@@ -7,10 +7,13 @@ import androidx.core.os.bundleOf
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.fragment.findNavController
 import com.example.aircontrol.R
+import com.example.aircontrol.adapters.HomePagerAdapter
 import com.example.aircontrol.client.AQICNService
 import com.example.aircontrol.client.AirQualityAPI
 import com.example.aircontrol.databinding.FragmentHomeBinding
 import com.example.aircontrol.models.PollutionData
+import com.google.android.material.tabs.TabLayoutMediator
+import kotlinx.android.synthetic.main.fragment_rating_and_news.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -32,25 +35,23 @@ class HomeFragment : Fragment() {
         activity?.window?.clearFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS)
 
 
-        val request = AQICNService.buildService(AirQualityAPI::class.java)
-        val call = request.getNearestCityPollutionData()
-        call.enqueue(object : Callback<PollutionData> {
-            override fun onResponse(call: Call<PollutionData>, response: Response<PollutionData>) {
-                val data = response.body()
-                val bundle = bundleOf("cityName" to (data?.data?.city?.name), "cityData" to  data)
-                findNavController().navigate(R.id.action_homeFragment_to_cityDataFragment, bundle)
-            }
 
-            override fun onFailure(call: Call<PollutionData>, t: Throwable) {
-
-            }
-        })
 
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        val homePagerAdapter = HomePagerAdapter(this)
+        pager.adapter = homePagerAdapter
+        TabLayoutMediator(binding.tabLayout, binding.pager) { tab, position ->
+            tab.text = when(position) {
+                0 -> "Home"
+                1 -> "Selected"
+                else -> "Unknown"
+            }
+        }.attach()
     }
 
 

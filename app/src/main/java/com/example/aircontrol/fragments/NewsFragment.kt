@@ -20,9 +20,9 @@ class NewsFragment : Fragment(), AdapterNewsListClickListener {
 
     lateinit var binding : FragmentNewsBinding
     data class NewsData(val title: String, val date: String, val image: Int)
-    private val newsDataArray: ArrayList<NewsData> = arrayListOf(NewsData("PM10", "10.02.2020", R.drawable.pollution1), NewsData("SO2", "10.02.2020", R.drawable.pollution1),
-                                                                NewsData("PM2.5", "10.02.2020", R.drawable.pollution2), NewsData("C6H6", "10.02.2020", R.drawable.pollution2),
-                                                                NewsData("O3", "10.02.2020", R.drawable.pollution3), NewsData("CO", "10.02.2020", R.drawable.pollution3),
+    private val newsDataArray: ArrayList<NewsData> = arrayListOf(NewsData("PM10", "10.02.2020", R.drawable.pollution1), NewsData("SO2", "10.02.2020", R.drawable.pollution5),
+                                                                NewsData("PM2.5", "10.02.2020", R.drawable.pollution2), NewsData("C6H6", "10.02.2020", R.drawable.pollution6),
+                                                                NewsData("O3", "10.02.2020", R.drawable.pollution3), NewsData("CO", "10.02.2020", R.drawable.pollution7),
                                                                 NewsData("NO2", "10.02.2020", R.drawable.pollution4))
 
     override fun onCreate(savedInstanceState: Bundle?) {

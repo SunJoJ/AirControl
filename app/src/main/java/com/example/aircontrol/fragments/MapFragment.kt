@@ -72,7 +72,8 @@ class MapFragment : Fragment(), OnMapReadyCallback {
                                 data.data.city.geo[0],
                                 data.data.city.geo[1],
                                 data.data.idx.toString(),
-                                data.data.aqi.toString()
+                                data.data.aqi.toString(),
+                                city.cityName
                             )
                         )
                         listOfPollutionData.add(data)
@@ -87,11 +88,13 @@ class MapFragment : Fragment(), OnMapReadyCallback {
         }
 
 
-        mClusterManager.let { it.setOnClusterItemClickListener {
+        mClusterManager.let { it ->
+            it.setOnClusterItemClickListener {
             val cityData = listOfPollutionData.filter { x -> x.data.idx.toString() == it.title }
             val bundle = bundleOf(
                 "cityName" to cityData[0].data.city.name,
-                "cityData" to cityData[0]
+                "cityData" to cityData[0],
+                "cityNameForRequest" to it.getCityName()
             )
             view?.findNavController()?.navigate(
                 R.id.action_mapFragment_to_markerDetailsFragment,

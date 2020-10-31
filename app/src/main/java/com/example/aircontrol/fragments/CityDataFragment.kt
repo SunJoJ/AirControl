@@ -45,7 +45,7 @@ class CityDataFragment : Fragment() {
         val cityData: PollutionData? = arguments?.getParcelable("cityData")
 
         addressTextView.text = arguments?.getString("cityName")
-        detailsTextView.text = "AQI " + cityData?.data?.aqi.toString()
+        detailsTextView.text = getString(R.string.aqi, cityData?.data?.aqi.toString())
 
         detailsTextView.background = cityData?.data?.aqi.let {
             it?.let { it1 -> QualityRanges.getIndexColor(it1) }
@@ -66,11 +66,18 @@ class CityDataFragment : Fragment() {
             adapter = CurrentDataAdapter(currentData)
         }
 
-        tempText.text = cityData?.data?.iaqi?.t?.v.toString() + " ℃"
-        humidityText.text = cityData?.data?.iaqi?.h?.v.toString() + " %"
-        windSpeedText.text = cityData?.data?.iaqi?.w?.v.toString() + " m/h"
+        tempText.text = getString(R.string.temperature, cityData?.data?.iaqi?.t?.v.toString())
+        humidityText.text = cityData?.data?.iaqi?.h?.v.toString() + " %" //getString(R.string.humidity, cityData?.data?.iaqi?.h?.v.toString())
+        windSpeedText.text = getString(R.string.wind_speed, cityData?.data?.iaqi?.w?.v.toString())
 
-
+        pm10button.performClick()
+        val chartData = cityData?.data?.forecast?.daily
+        val data = chartData?.let { context?.let { it1 -> QualityRanges.paintChart(it, it1, "pm10", barChart) } }
+        barChart.data = data
+        barChart.axisRight.isEnabled = false
+        barChart.description.isEnabled = false
+        barChart.legend.isEnabled = false
+        barChart.animateY(2000)
         
 
         toggleButton.addOnButtonCheckedListener { group, checkedId, isChecked ->

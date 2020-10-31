@@ -14,7 +14,7 @@
     <string name="password">Password</string>
     <string name="login">Login</string>
     <string name="city">City</string>
-    <string name="aqi">AQI 35</string>
+    <string name="aqi">AQI %1$s</string>
     <string name="div">#</string>
     <string name="test">Long test text to check how string looks like</string>
     <string name="date">17.10.2020 17:00:00</string>
@@ -169,4 +169,7 @@ Czad przedostaje się do ludzkiego organizmu poprzez układ oddechowy a następn
     <string name="back">back</string>
     <string name="rankings_and_news">Rankings and news</string>
     <string name="statistics">Statistics</string>
+    <string name="humidity">%1$s \%</string>
+    <string name="wind_speed">%1$s m/s</string>
+    <string name="temperature">%1$s °C</string>
 </resources>

@@ -20,6 +20,9 @@
             <argument
                 android:name="cityData"
                 app:argType="com.example.aircontrol.models.PollutionData" />
+            <argument
+                android:name="cityNameForRequest"
+                app:argType="string" />
         </action>
 
     </fragment>
@@ -145,6 +148,18 @@
         android:name="com.example.aircontrol.fragments.TextDescriptionFragment"
         android:label="fragment_text_description"
         tools:layout="@layout/fragment_text_description" />
+
+    <fragment
+        android:id="@+id/selectedStationsList"
+        android:name="com.example.aircontrol.fragments.SelectedStationsList"
+        android:label="SelectedStationsList"
+        tools:layout="@layout/fragment_selected_stations_list"/>
+
+    <fragment
+        android:id="@+id/closestCityFragment"
+        android:name="com.example.aircontrol.fragments.ClosestCityFragment"
+        android:label="fragment_closest_city"
+        tools:layout="@layout/fragment_city_data" />
 
 
 </navigation>

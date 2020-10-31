@@ -4,11 +4,11 @@ object Cities {
 
     data class CityWithCode(val cityName: String, val isoCode: String)
 
-    val citiesArray = arrayOf(CityWithCode("beijing", "cn"), CityWithCode("moscow", "pl"),
+    val citiesArray = arrayOf(CityWithCode("beijing", "cn"), CityWithCode("moscow", "ru"),
         CityWithCode("wroclaw","pl"), CityWithCode("warsaw","pl"),
         CityWithCode("berlin", "de"), CityWithCode("poznan", "pl"))
 
-    val allCitiesArray = arrayOf(CityWithCode("beijing", "cn"), CityWithCode("moscow", "pl"),
+    val allCitiesArray = arrayOf(CityWithCode("beijing", "cn"), CityWithCode("moscow", "ru"),
         CityWithCode("wroclaw","pl"), CityWithCode("warsaw","pl"),
         CityWithCode("berlin", "de"), CityWithCode("poznan", "pl"), CityWithCode("shanghai","cn"), CityWithCode("kaliningrad","ru"),
         CityWithCode("leningrad","ru"), CityWithCode("macao","mo"), CityWithCode("kyoto","jp"), CityWithCode("ufa","ru"),

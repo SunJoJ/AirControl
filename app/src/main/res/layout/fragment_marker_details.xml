@@ -7,7 +7,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/markerDetailsFragmentLayout"
         android:layout_width="match_parent"
-        android:layout_height="120dp"
+        android:layout_height="wrap_content"
         android:paddingRight="5dp"
         android:paddingLeft="5dp"
         android:paddingTop="5dp"
@@ -16,7 +16,7 @@
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/addressTextView"
-            android:layout_width="370dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ellipsize="end"
             android:maxLines="1"
@@ -24,6 +24,7 @@
             android:paddingTop="5dp"
             android:paddingBottom="5dp"
             android:text="@string/test_address"
+            android:layout_marginEnd="32dp"
             android:textColor="@color/black"
             android:textSize="12sp"
             app:layout_constraintStart_toStartOf="parent"
@@ -47,6 +48,7 @@
             android:textColor="@color/white"
             android:textSize="20sp"
             app:layout_constraintTop_toBottomOf="@+id/addressTextView"
+            app:layout_constraintBottom_toBottomOf="parent"
             tools:layout_editor_absoluteX="5dp" />
 
         <com.google.android.material.checkbox.MaterialCheckBox
@@ -54,7 +56,7 @@
             android:layout_width="25dp"
             android:layout_height="25dp"
             android:layout_marginBottom="6dp"
-            android:button="@drawable/ic_baseline_star_border_24"
+            android:button="@drawable/sl_choose_button"
             app:buttonTint="@android:color/background_dark"
             app:layout_constraintBottom_toTopOf="@+id/detailsTextView"
             app:layout_constraintEnd_toEndOf="parent"

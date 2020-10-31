@@ -10,19 +10,6 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <com.google.android.material.appbar.AppBarLayout
-            android:id="@+id/toolBar"
-            android:layout_width="match_parent"
-            android:layout_height="56dp">
-
-            <com.google.android.material.imageview.ShapeableImageView
-                android:layout_width="150dp"
-                android:layout_height="match_parent"
-                android:src="@drawable/logo"/>
-
-
-
-        </com.google.android.material.appbar.AppBarLayout>
 
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
@@ -119,66 +106,63 @@
                         android:orientation="horizontal"
                         android:background="@drawable/rounded_corner">
 
-                        <ImageView
-                            android:id="@+id/weatherIcon"
-                            android:layout_width="45dp"
+                        <androidx.appcompat.widget.LinearLayoutCompat
+                            android:layout_width="wrap_content"
                             android:layout_height="match_parent"
-                            android:layout_marginStart="20dp"
-                            android:scaleX="0.8"
-                            android:scaleY="0.8"
-                            android:src="@drawable/temp"
-                            app:layout_constraintStart_toStartOf="parent"
-                            tools:layout_editor_absoluteY="4dp" />
-
-                        <TextView
-                            android:id="@+id/tempText"
-                            android:layout_width="50dp"
-                            android:layout_height="match_parent"
-                            android:gravity="center_vertical"
-                            android:text="8"
-                            android:textSize="12sp"
-                            app:layout_constraintStart_toEndOf="@id/weatherIcon"
-                            tools:layout_editor_absoluteY="16dp" />
-
-                        <ImageView
-                            android:id="@+id/humidityIcon"
-                            android:layout_width="50dp"
-                            android:layout_height="match_parent"
-                            android:scaleX="0.7"
-                            android:scaleY="0.6"
-                            app:layout_constraintStart_toEndOf="@id/tempText"
-                            android:src="@drawable/humidity"/>
-
-                        <TextView
-                            android:id="@+id/humidityText"
-                            android:layout_width="50dp"
-                            android:layout_height="match_parent"
-                            android:gravity="center_vertical"
-                            app:layout_constraintStart_toEndOf="@+id/humidityIcon"
-                            android:text="8"
-                            android:textSize="12sp" />
-
-                        <ImageView
-                            android:id="@+id/windIcon"
-                            android:layout_width="50dp"
-                            android:layout_height="match_parent"
-                            android:scaleX="0.7"
-                            android:scaleY="0.6"
-                            android:src="@drawable/wind_icon"
-                            app:layout_constraintStart_toEndOf="@+id/humidityText"
-                            tools:layout_editor_absoluteY="4dp" />
-
-                        <TextView
-                            android:id="@+id/windSpeedText"
-                            android:layout_width="50dp"
-                            android:layout_height="match_parent"
-                            android:gravity="center_vertical"
-                            android:text="10"
-                            android:textSize="12sp"
                             app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintHorizontal_bias="0.0"
-                            app:layout_constraintStart_toEndOf="@+id/windIcon"
-                            tools:layout_editor_absoluteY="4dp" />
+                            app:layout_constraintStart_toStartOf="parent"
+                            tools:layout_editor_absoluteY="3dp">
+
+                            <ImageView
+                                android:id="@+id/weatherIcon"
+                                android:layout_width="45dp"
+                                android:layout_height="match_parent"
+
+                                android:scaleX="0.8"
+                                android:scaleY="0.8"
+                                android:src="@drawable/temp" />
+
+                            <TextView
+                                android:id="@+id/tempText"
+                                android:layout_width="60dp"
+                                android:layout_height="match_parent"
+                                android:gravity="center_vertical"
+                                android:text="@string/temperature"
+                                android:textSize="12sp" />
+
+                            <ImageView
+                                android:id="@+id/humidityIcon"
+                                android:layout_width="50dp"
+                                android:layout_height="match_parent"
+                                android:scaleX="0.7"
+                                android:scaleY="0.6"
+                                android:src="@drawable/humidity" />
+
+                            <TextView
+                                android:id="@+id/humidityText"
+                                android:layout_width="60dp"
+                                android:layout_height="match_parent"
+                                android:gravity="center_vertical"
+                                android:text="@string/humidity"
+                                android:textSize="12sp" />
+
+                            <ImageView
+                                android:id="@+id/windIcon"
+                                android:layout_width="50dp"
+                                android:layout_height="match_parent"
+                                android:scaleX="0.7"
+                                android:scaleY="0.6"
+                                android:src="@drawable/wind_icon" />
+
+                            <TextView
+                                android:id="@+id/windSpeedText"
+                                android:layout_width="60dp"
+                                android:layout_height="match_parent"
+                                android:gravity="center_vertical"
+                                android:text="@string/wind_speed"
+                                android:textSize="12sp" />
+
+                        </androidx.appcompat.widget.LinearLayoutCompat>
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
