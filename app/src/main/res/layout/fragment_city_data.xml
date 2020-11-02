@@ -37,58 +37,101 @@
                     app:layout_constraintVertical_bias="0.0"
                     style="bold"/>
 
-                <com.google.android.material.circularreveal.CircularRevealRelativeLayout
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/markerDetailsFragmentLayout"
                     android:layout_width="match_parent"
-                    android:layout_height="130dp"
-                    android:background="@drawable/rounded_corner"
-                    android:clickable="true"
-                    android:paddingLeft="5dp"
-                    android:paddingTop="5dp"
+                    android:layout_height="wrap_content"
                     android:paddingRight="5dp"
+                    android:paddingLeft="5dp"
+                    app:layout_constraintTop_toBottomOf="@id/cityName"
+                    android:paddingTop="5dp"
+                    android:background="@drawable/rounded_corner"
                     android:paddingBottom="5dp"
                     android:layout_marginEnd="10dp"
                     android:layout_marginStart="10dp"
-                    app:layout_constraintTop_toBottomOf="@id/cityName"
-                    app:layout_constraintHorizontal_bias="0.0">
+                    android:clickable="true">
 
                     <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/addressTextView"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="5dp"
-                        android:layout_marginTop="5dp"
-                        android:layout_marginRight="5dp"
+                        android:ellipsize="end"
+                        android:maxLines="1"
                         android:paddingStart="5dp"
                         android:paddingTop="5dp"
                         android:paddingBottom="5dp"
-                        android:maxLines="1"
-                        android:ellipsize="end"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginEnd="5dp"
                         android:text="@string/test_address"
                         android:textColor="@color/black"
                         android:textSize="12sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
                         tools:ignore="RtlSymmetry" />
 
-                    <com.google.android.material.textview.MaterialTextView
-                        android:id="@+id/detailsTextView"
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/constraintLayout"
                         android:layout_width="match_parent"
-                        android:layout_height="80dp"
+                        android:layout_height="wrap_content"
                         android:layout_alignParentBottom="true"
                         android:layout_gravity="center_vertical"
-                        android:layout_marginLeft="5dp"
-                        android:layout_marginRight="5dp"
-                        android:layout_marginBottom="5dp"
-                        android:background="@drawable/dark_green_rounded_corner"
+                        android:background="@drawable/yellow_rounded_corner"
                         android:firstBaselineToTopHeight="0dp"
                         android:gravity="center_horizontal"
                         android:includeFontPadding="false"
                         android:lineSpacingExtra="0dp"
-                        android:padding="30dp"
-                        android:text="@string/aqi"
-                        android:textColor="@color/white"
-                        android:textSize="20sp" />
+                        android:padding="25dp"
+                        android:layout_margin="5dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/addressTextView"
+                        app:layout_constraintVertical_bias="0.0"
+                        tools:layout_editor_absoluteX="5dp">
 
-                </com.google.android.material.circularreveal.CircularRevealRelativeLayout>
+
+                        <LinearLayout
+                            android:id="@+id/linearLayout"
+                            android:layout_width="40dp"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                            <com.google.android.material.textview.MaterialTextView
+                                android:id="@+id/detailsTextView"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:text="71"
+                                android:textColor="@color/white"
+                                android:textSize="24sp" />
+
+                            <com.google.android.material.textview.MaterialTextView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:gravity="center"
+                                android:text="@string/aqi_header"
+                                android:textColor="@color/white"
+                                android:textSize="14sp" />
+
+                        </LinearLayout>
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/aqiIndexText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Jakosc powietrza - umiarkowana"
+                            android:textAlignment="center"
+                            android:textColor="@color/white"
+                            android:textSize="18sp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/linearLayout"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <com.google.android.material.circularreveal.CircularRevealRelativeLayout
                     android:id="@+id/weatherDataLayout"
@@ -117,7 +160,6 @@
                                 android:id="@+id/weatherIcon"
                                 android:layout_width="45dp"
                                 android:layout_height="match_parent"
-
                                 android:scaleX="0.8"
                                 android:scaleY="0.8"
                                 android:src="@drawable/temp" />

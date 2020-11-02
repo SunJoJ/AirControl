@@ -72,6 +72,30 @@ object QualityRanges {
     private const val bad = 150
     private const val veryBad = 200
 
+    fun aqiIndexText(aqi: Int) : String {
+        when {
+            isBetween(aqi, 0, veryGood) -> {
+                return "Jakość powietrza - bardzo dobra"
+            }
+            isBetween(aqi, veryGood + 1, good) -> {
+                return "Jakość powietrza - dobra"
+            }
+            isBetween(aqi, good + 1, moderate) -> {
+                return "Jakość powietrza - umiarkowana"
+            }
+            isBetween(aqi, moderate + 1, passable) -> {
+                return "Jakość powietrza - dopuszczalna"
+            }
+            isBetween(aqi, passable + 1, bad) -> {
+                return "Jakość powietrza - zła"
+            }
+            isBetween(aqi, bad + 1, veryBad) -> {
+                return "Jakość powietrza - bardzo zła"
+            }
+        }
+        return "Brak danych"
+    }
+
     fun paintChart(values: Daily, context: Context, parameter: String, barChart: BarChart): BarData {
 
         when(parameter) {

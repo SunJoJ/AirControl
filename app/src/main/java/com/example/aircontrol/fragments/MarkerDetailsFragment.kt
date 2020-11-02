@@ -53,12 +53,14 @@ class MarkerDetailsFragment : DialogFragment() {
 
         addressTextView.text = arguments?.getString("cityName")
         val cityData: PollutionData? = arguments?.getParcelable("cityData")
-        detailsTextView.text = "AQI " + cityData?.data?.aqi.toString()
+        detailsTextView.text = cityData?.data?.aqi.toString()
 
-        detailsTextView.background = cityData?.data?.aqi.let {
+        constraintLayout.background = cityData?.data?.aqi.let {
             it?.let { it1 -> QualityRanges.getIndexColor(it1) }
         }?.let { resources.getDrawable(it) }
 
+        val aqiText = cityData?.data?.aqi?.let { QualityRanges.aqiIndexText(it) }
+        aqiIndexText.text = aqiText
 
         markerDetailsFragmentLayout.setOnClickListener {
             val bundle = bundleOf("cityName" to  arguments?.getString("cityName"), "cityData" to  arguments?.getParcelable("cityData"))

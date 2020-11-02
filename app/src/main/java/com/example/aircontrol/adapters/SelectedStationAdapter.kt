@@ -12,6 +12,7 @@ import com.example.aircontrol.fragments.SelectedStationsList
 import com.example.aircontrol.utils.QualityRanges
 import com.google.android.material.checkbox.MaterialCheckBox
 import com.google.android.material.textview.MaterialTextView
+import kotlinx.android.synthetic.main.fragment_marker_details.*
 
 class SelectedStationAdapter(private val context: Context,
                              private val dataSource: ArrayList<SelectedStationsList.PollutionDataWithRequestName>,
@@ -43,12 +44,17 @@ class SelectedStationAdapter(private val context: Context,
         val addressTextView = rowView.findViewById(R.id.addressTextView) as MaterialTextView
         val iconChoose = rowView.findViewById(R.id.iconChoose) as MaterialCheckBox
         val markerDetailsFragmentLayout = rowView.findViewById(R.id.markerDetailsFragmentLayout) as ConstraintLayout
+        val constraintLayout = rowView.findViewById(R.id.constraintLayout) as ConstraintLayout
+        val aqiIndexText = rowView.findViewById(R.id.aqiIndexText) as MaterialTextView
 
         iconChoose.isChecked = true
-        detailsTextView.text = "AQI " + cityData?.data?.aqi.toString()
+        detailsTextView.text = cityData?.data?.aqi.toString()
         addressTextView.text = cityData.data.city.name
 
-        detailsTextView.background = cityData.data.aqi.let {
+        val aqiText = cityData?.data?.aqi?.let { QualityRanges.aqiIndexText(it) }
+        aqiIndexText.text = aqiText
+
+        constraintLayout.background = cityData.data.aqi.let {
             it.let { it1 -> QualityRanges.getIndexColor(it1) }
         }.let { getDrawable(context, it) }
 

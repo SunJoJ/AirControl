@@ -19,6 +19,11 @@ import com.example.aircontrol.models.CurrentData
 import com.example.aircontrol.models.PollutionData
 import com.example.aircontrol.utils.QualityRanges
 import kotlinx.android.synthetic.main.fragment_city_data.*
+import kotlinx.android.synthetic.main.fragment_city_data.addressTextView
+import kotlinx.android.synthetic.main.fragment_city_data.aqiIndexText
+import kotlinx.android.synthetic.main.fragment_city_data.constraintLayout
+import kotlinx.android.synthetic.main.fragment_city_data.detailsTextView
+import kotlinx.android.synthetic.main.fragment_marker_details.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -57,11 +62,14 @@ class ClosestCityFragment : Fragment() {
                 val cityData: PollutionData? = response.body()
 
                 addressTextView.text = cityData?.data?.city?.name
-                detailsTextView.text = getString(R.string.aqi, cityData?.data?.aqi.toString())
+                detailsTextView.text = cityData?.data?.aqi.toString()
 
-                detailsTextView.background = cityData?.data?.aqi.let {
+                constraintLayout.background = cityData?.data?.aqi.let {
                     it?.let { it1 -> QualityRanges.getIndexColor(it1) }
                 }?.let { resources.getDrawable(it) }
+
+                val aqiText = cityData?.data?.aqi?.let { QualityRanges.aqiIndexText(it) }
+                aqiIndexText.text = aqiText
 
                 cityName.text = cityData?.data?.attributions?.get(0)?.name
                 timeStamp.text = cityData?.data?.time?.s
