@@ -15,11 +15,6 @@ import kotlinx.android.synthetic.main.fragment_rating_and_news.*
 
 
 
-/**
- * A simple [Fragment] subclass.
- * Use the [RatingAndNewsFragment1.newInstance] factory method to
- * create an instance of this fragment.
- */
 class RatingAndNewsFragment : Fragment() {
 
     lateinit var binding : FragmentRatingAndNewsBinding
@@ -48,8 +43,8 @@ class RatingAndNewsFragment : Fragment() {
         pager.adapter = ratingAndNewsPagerAdapter
         TabLayoutMediator(binding.tabLayout, binding.pager) { tab, position ->
             tab.text = when(position) {
-                0 -> "Rating"
-                1 -> "News"
+                0 -> "Ranking"
+                1 -> "Wiadomości"
                 else -> "Unknown"
             }
         }.attach()

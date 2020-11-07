@@ -92,6 +92,9 @@ object QualityRanges {
             isBetween(aqi, bad + 1, veryBad) -> {
                 return "Jakość powietrza - bardzo zła"
             }
+            isBetween(aqi, veryBad, 999999) -> {
+                return "Jakość powietrza - szkodliwa dla zdrowia"
+            }
         }
         return "Brak danych"
     }

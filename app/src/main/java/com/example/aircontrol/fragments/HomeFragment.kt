@@ -47,8 +47,8 @@ class HomeFragment : Fragment() {
         pager.adapter = homePagerAdapter
         TabLayoutMediator(binding.tabLayout, binding.pager) { tab, position ->
             tab.text = when(position) {
-                0 -> "Home"
-                1 -> "Selected"
+                0 -> "Najbliższe"
+                1 -> "Wybrane"
                 else -> "Unknown"
             }
         }.attach()

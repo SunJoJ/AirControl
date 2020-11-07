@@ -19,5 +19,6 @@
     <color name="gray">#BDBDBD</color>
     <color name="lightGray">#E0E0E0</color>
     <color name="transparent">#80000000</color>
+    <color name="notification">#344955</color>
 
 </resources>

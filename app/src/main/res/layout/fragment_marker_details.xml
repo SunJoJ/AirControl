@@ -66,8 +66,7 @@
                     android:text="71"
                     android:gravity="center"
                     android:textColor="@color/white"
-                    android:textSize="24sp"
-                    />
+                    android:textSize="24sp" />
 
                 <com.google.android.material.textview.MaterialTextView
                     android:layout_width="match_parent"
@@ -81,7 +80,7 @@
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/aqiIndexText"
-                android:layout_width="wrap_content"
+                android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -89,7 +88,7 @@
                 app:layout_constraintTop_toTopOf="parent"
                 android:textSize="18sp"
                 android:textColor="@color/white"
-                android:text="Jakosc powietrza - umiarkowana"
+                android:text="Jakość powietrza - szkodliwa dla zdrowia"
                 android:textAlignment="center"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
