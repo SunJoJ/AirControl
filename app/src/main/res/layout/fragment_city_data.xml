@@ -29,8 +29,7 @@
                     android:textAlignment="center"
                     android:textSize="18sp"
                     android:padding="10sp"
-                    android:text="@string/test"
-                    app:layout_constraintBottom_toTopOf="@+id/markerDetailsFragmentLayout"
+                    app:layout_constraintBottom_toTopOf="@+id/markerDetailsLayout"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintTop_toTopOf="parent"
@@ -38,7 +37,7 @@
                     style="bold"/>
 
                 <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/markerDetailsFragmentLayout"
+                    android:id="@+id/markerDetailsLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingRight="5dp"
@@ -90,7 +89,7 @@
 
                         <LinearLayout
                             android:id="@+id/linearLayout"
-                            android:layout_width="40dp"
+                            android:layout_width="50dp"
                             android:layout_height="wrap_content"
                             android:orientation="vertical"
                             app:layout_constraintStart_toStartOf="parent"
@@ -101,7 +100,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:gravity="center"
-                                android:text="71"
+                                android:text="169"
                                 android:textColor="@color/white"
                                 android:textSize="24sp" />
 
@@ -140,7 +139,7 @@
                     android:layout_marginTop="5dp"
                     android:layout_marginEnd="10dp"
                     android:layout_marginStart="10dp"
-                    app:layout_constraintTop_toBottomOf="@+id/markerDetailsFragmentLayout">
+                    app:layout_constraintTop_toBottomOf="@+id/markerDetailsLayout">
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
@@ -210,6 +209,7 @@
 
                 </com.google.android.material.circularreveal.CircularRevealRelativeLayout>
 
+
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/timeStamp"
                     android:layout_width="match_parent"
@@ -220,12 +220,121 @@
                     app:layout_constraintTop_toBottomOf="@+id/weatherDataLayout"
                     app:layout_constraintVertical_bias="0.012" />
 
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/suggestions"
+                    android:layout_width="match_parent"
+                    android:layout_height="75dp"
+                    android:layout_marginTop="10dp"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="10dp"
+
+                    app:layout_constraintTop_toBottomOf="@id/timeStamp">
+
+                    <RelativeLayout
+                        android:id="@+id/firstAdviceIcon"
+                        android:layout_width="75dp"
+                        android:layout_height="75dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintEnd_toStartOf="@id/secondAdviceIcon"
+                        android:background="@drawable/rounded_corner"
+                        android:foreground="@drawable/ripple_fade">
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:src="@drawable/window"
+                            android:scaleX="0.7"
+                            android:scaleY="0.7" />
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/secondAdviceIcon"
+                        android:layout_width="75dp"
+                        android:layout_height="75dp"
+                        android:layout_marginStart="15dp"
+                        app:layout_constraintStart_toEndOf="@id/firstAdviceIcon"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintEnd_toStartOf="@id/thirdAdviceIcon"
+                        android:background="@drawable/rounded_corner"
+                        android:foreground="@drawable/ripple_fade">
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:src="@drawable/bikecycle_512x512_512"
+                            android:scaleX="0.7"
+                            android:scaleY="0.8"/>
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/thirdAdviceIcon"
+                        android:layout_width="75dp"
+                        android:layout_height="75dp"
+                        android:layout_marginStart="15dp"
+                        app:layout_constraintStart_toEndOf="@id/secondAdviceIcon"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintEnd_toStartOf="@id/foursAdviceIcon"
+                        android:background="@drawable/rounded_corner"
+                        android:foreground="@drawable/ripple_fade">
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:src="@drawable/mask_icon"
+                            android:scaleX="0.7"
+                            android:scaleY="0.8"/>
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/foursAdviceIcon"
+                        android:layout_width="75dp"
+                        android:layout_height="75dp"
+                        android:layout_marginStart="15dp"
+                        app:layout_constraintStart_toEndOf="@id/thirdAdviceIcon"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        android:background="@drawable/rounded_corner"
+                        android:foreground="@drawable/ripple_fade">
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:src="@drawable/air_cleaner"
+                            android:scaleX="0.7"
+                            android:scaleY="0.8"/>
+                    </RelativeLayout>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <RelativeLayout
+                    android:id="@+id/adviceBackground"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:elevation="5dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/rounded_corner"
+                    app:layout_constraintTop_toBottomOf="@id/suggestions">
+
+                    <TextView
+                        android:id="@+id/adviceText"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="Test"
+                        android:textSize="14dp" />
+
+                </RelativeLayout>
+
                 <RelativeLayout
                     android:id="@+id/titleForecast"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    app:layout_constraintTop_toBottomOf="@+id/timeStamp">
+                    app:layout_constraintTop_toBottomOf="@+id/adviceBackground">
 
                     <com.google.android.material.textview.MaterialTextView
                         android:layout_width="match_parent"
@@ -250,6 +359,7 @@
                         android:id="@+id/barChart"
                         android:layout_width="match_parent"
                         android:layout_height="200dp" />
+
                 </RelativeLayout>
 
                 <com.google.android.material.button.MaterialButtonToggleGroup

@@ -5,8 +5,10 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.WindowManager
+import androidx.appcompat.widget.SearchView
 import androidx.core.os.bundleOf
+import androidx.cursoradapter.widget.CursorAdapter
+import androidx.cursoradapter.widget.SimpleCursorAdapter
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
@@ -22,6 +24,8 @@ import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.maps.android.clustering.ClusterManager
+import kotlinx.android.synthetic.main.fragment_city_data.view.*
+import kotlinx.android.synthetic.main.fragment_map.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -33,6 +37,8 @@ class MapFragment : Fragment(), OnMapReadyCallback {
     private lateinit var mClusterManager: ClusterManager<MarkerItem>
     val listOfPollutionData: ArrayList<PollutionData> = arrayListOf()
     private lateinit var customClusterRenderer: CustomClusterRenderer
+    private val suggestions: ArrayList<String> = arrayListOf()
+    private var mAdapter: SimpleCursorAdapter? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -45,7 +51,44 @@ class MapFragment : Fragment(), OnMapReadyCallback {
         val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
         mapFragment?.getMapAsync(this)
 
+
+
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        val from = arrayOf("cityName")
+        val to = intArrayOf(android.R.id.text1)
+        mAdapter = SimpleCursorAdapter(
+            activity,
+            android.R.layout.simple_list_item_1,
+            null,
+            from,
+            to,
+            CursorAdapter.FLAG_REGISTER_CONTENT_OBSERVER
+        )
+
+//        val searchView = searchNavigationMenu.menu.findItem(R.id.action_search).actionView
+//        searchView.suggestionsAdapter = mAdapter
+//        searchView.setIconifiedByDefault(false)
+//
+//
+//        searchView.setOnSuggestionListener(object : SearchView.OnSuggestionListener {
+//            override fun onSuggestionClick(position: Int): Boolean {
+//                val cursor = mAdapter.getItem(position)
+//                val txt = cursor.getString(cursor.getColumnIndex("cityName"))
+//                searchView.setQuery(txt, true)
+//                return true
+//            }
+//
+//            override fun onSuggestionSelect(position: Int): Boolean {
+//                return true
+//            }
+//        })
+
+
     }
 
     override fun onMapReady(googleMap: GoogleMap) {
@@ -77,6 +120,7 @@ class MapFragment : Fragment(), OnMapReadyCallback {
                             )
                         )
                         listOfPollutionData.add(data)
+                        suggestions.add(data.data.city.name)
                         mClusterManager.cluster()
                     }
                 }
@@ -104,6 +148,8 @@ class MapFragment : Fragment(), OnMapReadyCallback {
             true
             }
         }
+
+
 
 
     }

@@ -1,5 +1,6 @@
 package com.example.aircontrol.fragments
 
+import android.icu.text.CaseMap
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -7,11 +8,15 @@ import android.view.ViewGroup
 import android.view.WindowManager
 import android.widget.CompoundButton
 import android.widget.Toast
+import androidx.core.os.bundleOf
+import androidx.core.view.isInvisible
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.aircontrol.R
 import com.example.aircontrol.adapters.CurrentDataAdapter
+import com.example.aircontrol.adapters.CurrentDataClickListener
 import com.example.aircontrol.databinding.FragmentCityDataBinding
 import com.example.aircontrol.models.CurrentData
 import com.example.aircontrol.models.PollutionData
@@ -24,7 +29,7 @@ import kotlinx.android.synthetic.main.fragment_city_data.detailsTextView
 import kotlinx.android.synthetic.main.fragment_marker_details.*
 
 
-class CityDataFragment : Fragment() {
+class CityDataFragment : Fragment(), CurrentDataClickListener {
 
     lateinit var binding : FragmentCityDataBinding
 
@@ -52,6 +57,54 @@ class CityDataFragment : Fragment() {
         addressTextView.text = arguments?.getString("cityName")
         detailsTextView.text = cityData?.data?.aqi.toString()
 
+        markerDetailsLayout.setOnClickListener {
+            findNavController().navigate(R.id.action_cityDataFragment_to_indexDescriptionFragment)
+        }
+
+
+        if (cityData != null) {
+            when {
+                cityData.data.aqi < 50 -> {
+                    thirdAdviceIcon.isInvisible = true
+                    foursAdviceIcon.isInvisible = true
+                    adviceText.text = "Otwórz okno, aby przewietrzyć pomieszczenie."
+                }
+                cityData.data.aqi < 100 -> {
+                    foursAdviceIcon.isInvisible = true
+                    adviceText.text = "Lepiej zamknij okno."
+                }
+                else -> {
+                    adviceText.text = "Lepiej zamknij okno."
+                }
+            }
+        }
+
+        firstAdviceIcon.setOnClickListener {
+            if (cityData != null) {
+                if(cityData.data.aqi < 50) {
+                    adviceText.text = "Otwórz okno, aby przewietrzyć pomieszczenie."
+                } else if(cityData.data.aqi >= 50) {
+                    adviceText.text = "Lepiej zamknij okno."
+                }
+            }
+        }
+        secondAdviceIcon.setOnClickListener {
+            if (cityData != null) {
+                if(cityData.data.aqi < 50) {
+                    adviceText.text = "Сiesz się aktywnością na świeżym powietrzu."
+                } else if(cityData.data.aqi >= 50) {
+                    adviceText.text = "Zostań w domu."
+                }
+            }
+        }
+        thirdAdviceIcon.setOnClickListener {
+            adviceText.text = "Lepiej załóż maskę."
+        }
+        foursAdviceIcon.setOnClickListener {
+            adviceText.text = "Włącz oczyszczacz powietrza."
+        }
+
+
         constraintLayout.background = cityData?.data?.aqi.let {
             it?.let { it1 -> QualityRanges.getIndexColor(it1) }
         }?.let { resources.getDrawable(it) }
@@ -71,7 +124,7 @@ class CityDataFragment : Fragment() {
 
         currentDataRecyclerView.apply {
             layoutManager = GridLayoutManager(activity, 2)
-            adapter = CurrentDataAdapter(currentData)
+            adapter = CurrentDataAdapter(currentData,this@CityDataFragment)
         }
 
         tempText.text = getString(R.string.temperature, cityData?.data?.iaqi?.t?.v.toString())
@@ -86,7 +139,7 @@ class CityDataFragment : Fragment() {
         barChart.description.isEnabled = false
         barChart.legend.isEnabled = false
         barChart.animateY(2000)
-        
+
 
         toggleButton.addOnButtonCheckedListener { group, checkedId, isChecked ->
             if (isChecked){
@@ -128,7 +181,11 @@ class CityDataFragment : Fragment() {
 
 
 
+    }
 
+    override fun onItemClickListener(title: String) {
+        val bundle = bundleOf("title" to title.toUpperCase())
+        findNavController().navigate(R.id.action_cityDataFragment_to_textDescriptionFragment, bundle)
     }
 
 

@@ -70,6 +70,16 @@
                 android:name="cityData"
                 app:argType="com.example.aircontrol.models.PollutionData" />
         </action>
+        <action
+            android:id="@+id/action_homeFragment_to_indexDescriptionFragment"
+            app:destination="@id/indexDescriptionFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_textDescriptionFragment"
+            app:destination="@id/textDescriptionFragment">
+            <argument
+                android:name="title"
+                app:argType="string"/>
+        </action>
     </fragment>
 
     <fragment
@@ -134,7 +144,14 @@
         tools:layout="@layout/fragment_city_data" >
         <action
             android:id="@+id/action_cityDataFragment_to_textDescriptionFragment"
-            app:destination="@id/textDescriptionFragment" />
+            app:destination="@id/textDescriptionFragment">
+            <argument
+                android:name="title"
+                app:argType="string"/>
+        </action>
+        <action
+            android:id="@+id/action_cityDataFragment_to_indexDescriptionFragment"
+            app:destination="@id/indexDescriptionFragment" />
     </fragment>
 
     <fragment
@@ -160,6 +177,11 @@
         android:name="com.example.aircontrol.fragments.ClosestCityFragment"
         android:label="fragment_closest_city"
         tools:layout="@layout/fragment_city_data" />
+    <fragment
+        android:id="@+id/indexDescriptionFragment"
+        android:name="com.example.aircontrol.fragments.IndexDescriptionFragment"
+        android:label="fragment_index_description"
+        tools:layout="@layout/fragment_index_description" />
 
 
 </navigation>

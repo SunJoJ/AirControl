@@ -44,6 +44,9 @@ class TextDescriptionFragment : Fragment() {
             "PM2.5" -> {
                 sp = Html.fromHtml(getString(R.string.PM25))
             }
+            "PM25" -> {
+                sp = Html.fromHtml(getString(R.string.PM25))
+            }
             "O3" -> {
                 sp = Html.fromHtml(getString(R.string.O3))
             }

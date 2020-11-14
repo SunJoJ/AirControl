@@ -174,4 +174,15 @@ Czad przedostaje się do ludzkiego organizmu poprzez układ oddechowy a następn
     <string name="temperature">%1$s °C</string>
     <string name="prognoza">Prognoza</string>
     <string name="dane_aktualne">Dane aktualne</string>
+    <string name="purpleaqi"><b>Jakość powietrza jest niezdrowa.</b> <br/>
+Znaczący wpływ. Wrażliwe grupy odczuwają spadek wytrzymałości podczas aktywności. Zaleca się pozostać w domu.</string>
+    <string name="redaqi"><b>Jakość powietrza jest niska. </b> <br/>
+Zwiększone ryzyko i prawdopodobieństwo pogorszenia chorób serca i płuc w grupach wrażliwych.</string>
+    <string name="orangeaqi"><b>Jakość powietrza jest niezdrowa dla wrażliwych grup.</b> <br/>
+Osoby bardzo wrażliwe są narażone na podrażnienia i problemy z oddychaniem.</string>
+    <string name="yellowaqi"><b>Jakość powietrza jest umiarkowana.</b><br/>
+Osoby wrażliwe powinny unikać aktywności na świeżym powietrzu, ponieważ mogą wystąpić objawy ze strony układu oddechowego.</string>
+    <string name="greenaqi"><b>Jakość powietrza jest dobra.</b><br/>
+Powietrze jest normalne, a większość populacji nie jest zagrożona. Zalecana jest wentylacja.</string>
+    <string name="aqidesc"><b>AQI</b> to indeks jakości powietrza - system wskaźników odzwierciedlających aktualny stan zanieczyszczenia lub jakość powietrza. Wysokie wartości wskaźnika wskazują na wyższe i bardziej niebezpieczne poziomy zanieczyszczeń, podczas gdy wartości bliskie 0 są uznawane za dobrą jakość powietrza.</string>
 </resources>

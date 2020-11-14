@@ -1,17 +1,13 @@
 package com.example.aircontrol
 
 import android.annotation.SuppressLint
-import android.app.Notification
-import android.app.NotificationChannel
-import android.app.NotificationManager
+import android.app.*
 import android.content.Context
-import android.os.Build
+import android.content.Intent
 import android.os.Bundle
 import android.widget.RemoteViews
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.NotificationCompat
-import androidx.core.content.ContextCompat
-import androidx.core.graphics.drawable.toBitmap
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
@@ -22,6 +18,7 @@ import com.example.aircontrol.client.AirQualityAPI
 import com.example.aircontrol.databinding.ActivityMainBinding
 import com.example.aircontrol.models.PollutionData
 import com.example.aircontrol.utils.KeepStateNavigator
+import com.example.aircontrol.utils.PollutionNotification
 import com.example.aircontrol.utils.QualityRanges
 import kotlinx.android.synthetic.main.activity_main.*
 import retrofit2.Call
@@ -29,6 +26,7 @@ import retrofit2.Callback
 import retrofit2.Response
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
+import java.util.*
 
 
 class MainActivity : AppCompatActivity() {
@@ -45,68 +43,38 @@ class MainActivity : AppCompatActivity() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
 
 
-        val portraitCollapsedRemoteView = RemoteViews(packageName, R.layout.notification_layout_collapsed)
-        val expandedRemoteView = RemoteViews(packageName, R.layout.notification_layout_expanded)
+        createNotificationChannel()
+        val intent = Intent(this@MainActivity, PollutionNotification::class.java)
+        val pendingIntent = PendingIntent.getBroadcast(this@MainActivity, 10, intent, 0)
+        val alarmManager = getSystemService(ALARM_SERVICE) as AlarmManager
 
-        val request = AQICNService.buildService(AirQualityAPI::class.java)
-        val call = request.getNearestCityPollutionData()
-        call.enqueue(object : Callback<PollutionData> {
-            override fun onResponse(call: Call<PollutionData>, response: Response<PollutionData>) {
-                val cityData: PollutionData? = response.body()
+        val firingCal = Calendar.getInstance()
+        val currentCal = Calendar.getInstance()
 
-                portraitCollapsedRemoteView.setTextViewText(R.id.aqiNumberNotification, cityData?.data?.aqi.toString() + " AQI")
-                val indexColor = cityData?.data?.aqi?.let { QualityRanges.getIndexColor(it) }
-                indexColor?.let { portraitCollapsedRemoteView.setImageViewResource(R.id.notificationColorImageView, it) }
-                val currentDateTime = LocalDateTime.now()
-                portraitCollapsedRemoteView.setTextViewText(R.id.notificationTime, currentDateTime.format(
-                    DateTimeFormatter.ofPattern("HH:mm")))
-                portraitCollapsedRemoteView.setTextViewText(R.id.addressNotification, cityData?.data?.city?.name)
-                val desc = cityData?.data?.aqi?.let { QualityRanges.aqiIndexText(it) }
-                portraitCollapsedRemoteView.setTextViewText(R.id.detailsNotification, desc)
+        firingCal[Calendar.HOUR_OF_DAY] = 21
+        firingCal[Calendar.MINUTE] = 30
+        firingCal[Calendar.SECOND] = 30
 
-                
-                expandedRemoteView.setTextViewText(R.id.aqiNumberNotification, cityData?.data?.aqi.toString() + " AQI")
-                indexColor?.let { expandedRemoteView.setImageViewResource(R.id.notificationColorImageView, it) }
-                expandedRemoteView.setTextViewText(R.id.notificationTime, currentDateTime.format(
-                    DateTimeFormatter.ofPattern("HH:mm")))
-                expandedRemoteView.setTextViewText(R.id.addressNotification, cityData?.data?.city?.name)
-                expandedRemoteView.setTextViewText(R.id.detailsNotification, desc)
+        var intendedTime = firingCal.timeInMillis
+        val currentTime = currentCal.timeInMillis
 
-//        val landscapeCollapsedRemoteView = RemoteViews(packageName, R.layout.notification_layout_collapsed)
-//        val collapsedRemoteView = RemoteViews(landscapeCollapsedRemoteView, portraitCollapsedRemoteView)
-//        val portraitExpandedRemoteViewWithListView = RemoteViews(packageName, R.layout.notification_expanded_portrait_with_list_view)
-//        val landscapeExpandedRemoteView = RemoteViews(packageName, R.layout.notification_expanded_landscape)
-
-                val CHANNEL_ID = "FOO_CHANNEL_ID"
-                val name = "Foo channel name"
-                val importance = NotificationManager.IMPORTANCE_HIGH
-                val channel = NotificationChannel(CHANNEL_ID, name, importance)
-                // Register the channel with the system
-                (getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager).createNotificationChannel(channel)
-
-                val notificationBuilder = NotificationCompat.Builder(applicationContext, CHANNEL_ID).also {
-                    it.setCustomContentView(portraitCollapsedRemoteView)
-                    it.setCustomBigContentView(expandedRemoteView)
-//            it.setCustomHeadsUpContentView(headUpRemoteView)
-                    it.setStyle(NotificationCompat.DecoratedCustomViewStyle())
-                    it.setSmallIcon(R.drawable.logo) // Icon shown at the status bar
-                    it.setPriority(NotificationCompat.PRIORITY_MAX)
-                    it.setDefaults(Notification.DEFAULT_ALL)
-                }
-
-                val notification = notificationBuilder.build()
-                val notificationId = System.currentTimeMillis().toInt() // Any thing you want to be an id
-                (getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager).notify(notificationId, notification)
-
-
-            }
-
-            override fun onFailure(call: Call<PollutionData>, t: Throwable) {
-
-            }
-        })
-
-
+        if (intendedTime >= currentTime) {
+            alarmManager.setRepeating(
+                AlarmManager.RTC_WAKEUP,
+                firingCal.timeInMillis,
+                AlarmManager.INTERVAL_DAY,
+                pendingIntent
+            )
+        } else {
+            firingCal.add(Calendar.DAY_OF_MONTH, 1)
+            intendedTime = firingCal.timeInMillis
+            alarmManager.setRepeating(
+                AlarmManager.RTC,
+                intendedTime,
+                AlarmManager.INTERVAL_DAY,
+                pendingIntent
+            )
+        }
 
 
 //        var navController = findNavController(R.id.nav_host_fragment)
@@ -148,6 +116,5 @@ class MainActivity : AppCompatActivity() {
         )!!
         notificationManager.createNotificationChannel(channel)
     }
-
 
 }
